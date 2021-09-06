@@ -1,0 +1,116 @@
+nav#navBar {
+  position: relative;
+  z-index: 3;
+}
+.nav-item {
+  /* color: #fff; */
+  margin: auto;
+  font-weight: bolder;
+  margin-right: 20px;
+  font-family: proxima-nova;
+  font-weight: 300;
+  font-style: normal;
+  /* text-transform: uppercase; */
+  letter-spacing: 1px;
+  text-shadow: -1px -1px 1px rgba(255, 255, 255, 0.1),
+    1px 1px 1px rgba(0, 0, 0, 0.5);
+}
+.titleOfNav {
+  font-family: proxima-nova;
+  font-style: normal;
+  /* text-transform: uppercase; */
+  color: black !important;
+  text-shadow: -1px -1px 1px rgba(255, 255, 255, 0.1),
+    1px 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+a {
+  text-decoration: none !important;
+}
+a:hover {
+  color: rgba(255, 255, 255, 0.75) !important;
+}
+.container-fluid {
+  margin: 0;
+  padding: 0;
+}
+.navbar-nav {
+  margin: auto;
+}
+
+.mobileHr {
+  display: none;
+}
+.activeLink {
+  font-weight: bold;
+}
+.bg-dark {
+  position: fixed !important;
+  z-index: 2;
+}
+/* .activea {
+      font-weight: bold;
+    } */
+.navItem {
+  cursor: pointer;
+}
+@media only screen and (max-width: 990px) {
+  a.col-sm-1.navbar-brand {
+    width: 10%;
+    margin: auto;
+  }
+  .navFonts {
+    padding: 8px !important;
+  }
+  span.col-sm-2.navbar-brand {
+    position: absolute;
+    left: 10%;
+    top: 0;
+    font-size: large;
+  }
+  button.navbar-toggler.collapsed {
+    left: 0;
+    position: absolute;
+  }
+  button.navbar-toggler.collapsed {
+    left: 0;
+    top: 0;
+  }
+  .navbar-dark .navbar-brand:focus,
+  .navbar-dark .navbar-brand:hover {
+    color: #fff;
+    left: 50px;
+    position: absolute;
+  }
+  button.navbar-toggler {
+    left: 0;
+    position: absolute;
+    top: 0;
+  }
+  .nav-item {
+    margin: 10px auto;
+  }
+  /* a.col-sm-2.navbar-brand {
+        top: 0;
+        position: absolute;
+        left: 50px !important;
+      } */
+  .navbar-toggler:focus {
+    box-shadow: none !important;
+  }
+  .mobileHr {
+    display: block;
+  }
+  nav#navBar {
+    background: #212529 !important;
+  }
+  .titleOfNav.navbar-brand {
+    position: relative;
+    font-size: small;
+    top: 15px;
+    left: 50%;
+    color: #fff;
+    text-align: center;
+    transform: translateX(-50%) translateY(-50%);
+  }
+}
