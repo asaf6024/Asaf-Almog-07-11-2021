@@ -1,0 +1,25 @@
+.placesDiv {
+  position: absolute;
+  z-index: 3 !important;
+  width: 100%;
+}
+i.fa.fa-search {
+  display: none;
+}
+.locationsFounded {
+  position: absolute;
+  z-index: 1;
+  background: gray;
+  margin: auto;
+  text-align: center;
+  left: 50%;
+  top: 180px;
+  text-align: center;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
+.locationsFounded p:hover {
+  cursor: pointer;
+  background: black;
+  color: white;
+}

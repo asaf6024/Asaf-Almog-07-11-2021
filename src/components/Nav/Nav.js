@@ -5,14 +5,16 @@ import { useHistory } from 'react-router'
 import './nav.css'
 
 // Redux
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-// import { get_chart } from '../../redux/chart/chart-actions';
+import { useSelector, useDispatch } from 'react-redux'
+import { getFavorites } from '../../redux/favorites/favorites-actions'
 
 const NavPage = (props) => {
     let history = useHistory()
     const [active, setACtive] = useState('activea')
     const [bgDark, setBgDark] = useState(`inherit`)
+    const [themeIcon, setThemeIcon] = useState('fas fa-moon fa-2x')
+    let favoritesState = useSelector((state) => state.favoritesReducer.favorites)
+
     useEffect(() => {
 
         window.addEventListener("scroll", handleScroll);
@@ -48,6 +50,18 @@ const NavPage = (props) => {
 
     }
 
+    const setTheme = () => {
+        if (themeIcon == 'fas fa-moon fa-2x') {
+            document.getElementById('root').classList.add('DarkTheme')
+            document.getElementById('root').classList.remove('WhiteTheme')
+            setThemeIcon('far fa-lightbulb fa-2x text-white')
+        }
+        else {
+            document.getElementById('root').classList.add('WhiteTheme')
+            document.getElementById('root').classList.remove('DarkTheme')
+            setThemeIcon('fas fa-moon fa-2x')
+        }
+    }
     return (
         <Navbar variant="dark" style={{ background: bgDark }} expand="lg" className='col-sm-12' id='navBar'>
             {/* <Container > */}
@@ -61,8 +75,11 @@ const NavPage = (props) => {
                     </NavItem>
                     <hr className='mobileHr' />
                     <NavItem className='activeNav navItem' onClick={(e) => history.push('/food')} onClick={(e) => setActiveNav('/favorites', 'foodItem')}>
-                        <span id='foodItem' > Favorites</span>
+                        <span id='foodItem' > Favorites&nbsp; {favoritesState.length > 0 && favoritesState.length}</span>
                     </NavItem>
+                    <i className={themeIcon} style={{ cursor: 'pointer' }}
+                        onClick={() => setTheme()}
+                    ></i>
 
                 </Nav>
             </Navbar.Collapse>

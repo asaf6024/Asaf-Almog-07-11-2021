@@ -1,6 +1,24 @@
+#root {
+  /* background-image: url("./dist/img/myBackground2.jpg"); */
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50%;
+  background: url(./dist/img/backgroundImg.jpg) center center / cover no-repeat
+    fixed;
+  min-height: 100vh;
+}
+
 .CardOfWeather {
   padding: 15px;
 }
 .marginAuto {
   margin: auto;
+}
+.placesDiv {
+  position: absolute;
+  z-index: 3 !important;
+  width: 100%;
+}
+.cursorPointer {
+  cursor: pointer;
 }

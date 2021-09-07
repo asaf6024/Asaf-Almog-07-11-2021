@@ -22,13 +22,11 @@ nav#navBar {
   color: black !important;
   text-shadow: -1px -1px 1px rgba(255, 255, 255, 0.1),
     1px 1px 1px rgba(0, 0, 0, 0.5);
+  /* color: #fff; */
 }
 
 a {
   text-decoration: none !important;
-}
-a:hover {
-  color: rgba(255, 255, 255, 0.75) !important;
 }
 .container-fluid {
   margin: 0;
@@ -53,6 +51,7 @@ a:hover {
     } */
 .navItem {
   cursor: pointer;
+  color: black;
 }
 @media only screen and (max-width: 990px) {
   a.col-sm-1.navbar-brand {
