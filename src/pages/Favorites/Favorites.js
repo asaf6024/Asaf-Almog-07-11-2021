@@ -7,7 +7,7 @@ const Favorites = () => {
     return (
         <div className='container-fluid'>
             <MDBContainer>
-                <h1>Favorites</h1>
+                <h1 className='text-center font-weight-bold'>Favorites</h1>
                 <MDBRow>
                     <FavoriteList />
                 </MDBRow>

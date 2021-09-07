@@ -9,7 +9,8 @@ i.fa.fa-search {
 .locationsFounded {
   position: absolute;
   z-index: 1;
-  background: gray;
+  background: white;
+  border: 1px solid black;
   margin: auto;
   text-align: center;
   left: 50%;

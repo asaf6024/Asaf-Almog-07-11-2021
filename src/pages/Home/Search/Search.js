@@ -48,11 +48,10 @@ const Search = (props) => {
         <div className='container-fluid'>
             <MDBContainer>
                 <MDBRow>
-                    <MDBCol sm='12' lg='8' className='marginAuto'>
-                        <form className="form-inline mt-4 mb-4">
+                    <MDBCol sm='12' lg='8' className='marginAuto text-center'>
+                        <form className="form-inline mb-4">
                             <MDBIcon icon="search" />
-                            <input className="form-control w-75"
-                                required
+                            <input className="form-control w-100"
                                 type="text" placeholder="Search" aria-label="Search"
                                 // value={search}
                                 onChange={(e) =>

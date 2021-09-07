@@ -66,9 +66,9 @@ const Day = (props) => {
                                     {
                                         degreeState == 'Celsius' ?
                                             // toCelsius(w.Temperature.Maximum.Value) + "°" + -toCelsius(w.Temperature.Minimum.Value) + "°"
-                                            <p>  {toCelsius(w.Temperature.Maximum.Value)} <sup>°</sup> -  {toCelsius(w.Temperature.Minimum.Value)}<sup>°</sup> </p>
+                                            <p>  {toCelsius(w.Temperature.Minimum.Value)} <sup>°</sup> -{toCelsius(w.Temperature.Maximum.Value)}<sup>°</sup> </p>
                                             :
-                                            <p> {toFahrenheit(w.Temperature.Maximum.Value)}<sup>℉</sup>-{toFahrenheit(w.Temperature.Minimum.Value)} <sup>℉</sup> </p>
+                                            <p> {w.Temperature.Minimum.Value}<sup>℉</sup>-{w.Temperature.Maximum.Value} <sup>℉</sup> </p>
                                         // toFahrenheit(w.Temperature.Metric.Value) + "℉"
                                     }
 

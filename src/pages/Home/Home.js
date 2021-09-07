@@ -16,7 +16,7 @@ const Home = () => {
     return (
         <div className='container-fluid'>
             <MDBContainer>
-                <h1 className='text-center'>Forecast Weather</h1>
+                <h1 className='text-center font-weight-bold'>Forecast Weather</h1>
                 <Degrees />
                 <Search
                     setCityKey={setCityKey}

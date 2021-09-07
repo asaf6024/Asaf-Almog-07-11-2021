@@ -22,3 +22,14 @@
 .cursorPointer {
   cursor: pointer;
 }
+.cityHeadline {
+  font-weight: 500;
+}
+
+@media only screen and (max-width: 600px) {
+  .mobileHr {
+    display: block;
+    border-bottom: 1px solid black;
+    width: 100%;
+  }
+}

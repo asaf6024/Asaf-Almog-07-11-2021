@@ -75,12 +75,12 @@ a {
     left: 0;
     top: 0;
   }
-  .navbar-dark .navbar-brand:focus,
+  /* .navbar-dark .navbar-brand:focus,
   .navbar-dark .navbar-brand:hover {
     color: #fff;
     left: 50px;
     position: absolute;
-  }
+  } */
   button.navbar-toggler {
     left: 0;
     position: absolute;
@@ -100,8 +100,13 @@ a {
   .mobileHr {
     display: block;
   }
-  nav#navBar {
+  /* nav#navBar {
     background: #212529 !important;
+  } */
+  .themeIcon {
+    position: absolute;
+    right: 0 !important;
+    top: 0 !important;
   }
   .titleOfNav.navbar-brand {
     position: relative;

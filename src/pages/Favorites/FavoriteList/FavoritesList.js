@@ -55,7 +55,7 @@ const FavoriteList = (props) => {
                                         }
                                     })
                                 }}>
-                                    <h2 className='font-weight-bolder'>{f.Name}</h2>
+                                    <h2 className='cityHeadline'>{f.Name}</h2>
                                     <p className='font-italic'>{f.Current}</p>
                                     {
                                         f.Current.includes('Sunny') ?

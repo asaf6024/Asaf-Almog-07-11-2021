@@ -131,7 +131,7 @@ const Forecast = (props) => {
                                 <MDBRow key={index}>
                                     <MDBCol sm='12' lg='4' className='text-center'>
 
-                                        <h2 className='font-weight-bold' style={{ fontSize: 'xxx-large' }}>
+                                        <h2 className='cityHeadline' style={{ fontSize: 'xxx-large' }}>
                                             {c.cityName != undefined ? c.cityName : props.cityName}</h2>
                                         {/* <img src={`https://www.countryflags.io/${c.CountryId != undefined ? c.CountryId : props.countryId}/flat/64.png`}>
                                                         </img> */}
@@ -160,7 +160,7 @@ const Forecast = (props) => {
                                                         : ''
 
                                         }
-                                        <h3 id='currentWeather'>{c.WeatherText}</h3>
+                                        <h3 id='currentWeather' className='font-italic'>{c.WeatherText}</h3>
                                     </MDBCol>
 
                                     <MDBCol sm='12' lg='4' className='text-center'>

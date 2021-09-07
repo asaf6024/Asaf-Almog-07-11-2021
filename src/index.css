@@ -21,12 +21,31 @@ code {
 .DarkTheme .card,
 .DarkTheme .footer,
 .DarkTheme i.far.fa-lightbulb.fa-2x,
-.DarkTheme .navItem {
+.DarkTheme .navItem,
+.DarkTheme input {
   color: #fff !important;
   background: black !important;
 }
 .DarkTheme .DegreesDiv {
   background-color: white;
+}
+.DarkTheme .locationsFounded {
+  color: #fff;
+  background: black;
+  border: 1px solid white;
+}
+.DarkTheme .dayCard,
+.DarkTheme .card {
+  border: 1px solid white !important;
+}
+.DarkTheme nav {
+  border-bottom: 1px solid white !important;
+}
+.DarkTheme .footer {
+  border-top: 1px solid white !important;
+}
+.DarkTheme .mobileHr {
+  border-bottom: 1px solid white;
 }
 .WhiteTheme {
   background: white;

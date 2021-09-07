@@ -70,6 +70,7 @@ const NavPage = (props) => {
             <Navbar.Toggle aria-controls="navbar-dark-example" />
             <Navbar.Collapse id="navbar-dark-example" className='col-sm-12 col-lg-3 text-center'>
                 <Nav className='text-left'>
+                    <hr className='mobileHr' />
                     <NavItem className='activeNav navItem' onClick={(e) => setActiveNav('/', 'landingNavItem')}>
                         <span id='landingNavItem'> Home</span>
                     </NavItem>
@@ -77,7 +78,8 @@ const NavPage = (props) => {
                     <NavItem className='activeNav navItem' onClick={(e) => history.push('/food')} onClick={(e) => setActiveNav('/favorites', 'foodItem')}>
                         <span id='foodItem' > Favorites&nbsp; {favoritesState.length > 0 && favoritesState.length}</span>
                     </NavItem>
-                    <i className={themeIcon} style={{ cursor: 'pointer' }}
+                    <hr className='mobileHr' />
+                    <i className={`${themeIcon} text-center`} style={{ cursor: 'pointer' }}
                         onClick={() => setTheme()}
                     ></i>
 
