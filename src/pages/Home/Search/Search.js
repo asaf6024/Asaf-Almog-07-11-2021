@@ -1,41 +1,54 @@
-import { MDBCol, MDBContainer, MDBRow, MDBIcon } from 'mdbreact'
+import { MDBCol, MDBRow, MDBIcon } from 'mdbreact'
 import React, { useState, useEffect } from 'react'
-import cityObj from '../../../dist/obj/cityObj';
-import { withRouter } from 'react-router';
 import _ from "lodash";
+import { useHistory } from 'react-router-dom';
+import MyModal from '../../../components/Modal/MyModal'
+import './search.css'
+
+//fakeApi
+// import cityObj from '../../../dist/obj/cityObj';
+import { cityObj } from '../../../dist/obj/fakeApi';
 
 // Redux
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 import { useSelector, useDispatch } from 'react-redux'
 import { getLocationsByName } from '../../../redux/location/location-actions'
+import Spinner from '../../../components/Spinner/Spinner'
 
-import './search.css'
 const Search = (props) => {
 
     const dispatch = useDispatch()
-
-    // const [search, setSearch] = useState('')
+    const history = useHistory()
     const [loading, setLoading] = useState(true)
     const [locations, setLocations] = useState([])
     const [displayFounded, setDisplayFounded] = useState('none')
+    const [modalShow, setModalShow] = useState(false)
+
     let suggestions = useSelector((state) => state.locationReducer.locations)
 
+    //set location returned from api
     useEffect(() => {
-        // setLocations(cityObj)
-        // setSearch('London')
-
-        console.log('suggestions', suggestions)
+        // console.log('suggestions', suggestions)
         setLocations(suggestions)
 
     }, [suggestions])
 
-
+    //serach after 0.5 second of type
     const debounceFindCity = _.debounce((e) => {
-        setLocations(cityObj)
-        // setSearch('London')
+
+        props.setLat('')
+        props.setLon('')
         // setSearch(e.target.value)
         setDisplayFounded('block')
+
+        //initial favorites state when searching
+        history.push({
+            state: undefined
+        })
+
+        // //**fake api**
+        setLocations(cityObj)
+
+        //**api**
         // dispatch(getLocationsByName(e.target.value)).then((res) => {
         //     setLoading(false)
         //     // console.log('suggestions print', props.suggestions)
@@ -44,80 +57,71 @@ const Search = (props) => {
         // })
     }, 500);
 
+    const validateEnglishLetters = (e) => {
+        const regex = /^[a-zA-Z0-9 ]/;
+        const chars = e.target.value.split('');
+        const char = chars.pop();
+        if (!regex.test(char)) {
+            e.target.value = chars.join('');
+            // return alert(`${char} is not a valid character.`);
+            setModalShow(true)
+        }
+        else
+            return debounceFindCity(e)
+    }
     return (
-        <div className='container-fluid'>
-            <MDBContainer>
-                <MDBRow>
-                    <MDBCol sm='12' lg='8' className='marginAuto text-center'>
-                        <form className="form-inline mb-4">
-                            <MDBIcon icon="search" />
-                            <input className="form-control w-100"
-                                type="text" placeholder="Search" aria-label="Search"
-                                // value={search}
-                                onChange={(e) =>
-                                    debounceFindCity(e)
-                                }
-                                onFocus={(e) =>
-                                    debounceFindCity(e)
-                                }
-                            />
-                        </form>
-                    </MDBCol>
+        <>
+            <MDBRow>
+                <MDBCol sm='12' lg='8' className='marginAuto text-center'>
+                    <form className="form-inline mb-4">
+                        <MDBIcon icon="search" />
+                        <input className="form-control w-100"
+                            type="text" placeholder="Search" aria-label="Search"
+                            // value={search}
+                            onChange={(e) =>
+                                validateEnglishLetters(e)
+                            }
+                            onFocus={(e) => locations.length > 0 ?
+                                validateEnglishLetters(e)
+                                : setDisplayFounded('none')
+                            }
+                        />
+                    </form>
+                </MDBCol>
+            </MDBRow>
 
-                </MDBRow>
-                <MDBRow>
-                    <MDBCol sm='12'>
-                        {
-                            locations != null && locations.length > 0 &&
-                            <div className='locationsFounded text-center' style={{ display: displayFounded }}>
-                                {locations.slice(0, 10).map((l) => {
-                                    return <p onClick={() => {
-                                        props.setCityKey(l.Key)
-                                        props.setCityName(`${l.LocalizedName}, ${l.Country.LocalizedName}`)
-                                        props.setCountryId(l.Country.ID)
-                                        setDisplayFounded('none')
+            <MDBRow>
+                <MDBCol sm='12'>
+                    {
+                        locations != null && locations.length > 0 &&
+                        <div className='locationsFounded text-center' style={{ display: displayFounded }}>
+                            {locations.slice(0, 10).map((l) => {
+                                return <p onClick={() => {
+                                    props.setCityKey(l.Key)
+                                    props.setCityName(`${l.LocalizedName}, ${l.Country.LocalizedName}`)
+                                    props.setCountryId(l.Country.ID)
+                                    setDisplayFounded('none')
 
-                                    }}>
-                                        {l.LocalizedName},&nbsp;
-                                        {l.Country.LocalizedName}
-                                    </p>
-                                })
-                                }
-                            </div>
-                        }
-                    </MDBCol>
-                </MDBRow>
-                {/* <MDBRow>
-                    <MDBCol sm='12' lg='8' className='marginAuto'>
-                        {
-                            locations.length > 0 &&
-                            <select className='form-control' onChange={(e) => {
-                                props.setCityKey(e.target.value)
-                                props.setCityName(e.target.id)
-                            }}>
-                                <option value={0}>Choose..
-                                </option>
+                                }}>
+                                    {l.LocalizedName},&nbsp;
+                                    {l.Country.LocalizedName}
+                                </p>
+                            })
+                            }
+                        </div>
+                    }
+                </MDBCol>
+            </MDBRow>
 
-                                {
-                                    locations.map(l => {
-                                        return (
-                                            <option value={l.Key} id={l.LocalizedName} key={l.key}>
-                                                {l.LocalizedName},&nbsp;
-                                                {l.Country.LocalizedName}
-                                            </option>
-                                        )
-
-
-
-                                    })}
-
-                            </select>
-
-                        }
-                    </MDBCol>
-                </MDBRow> */}
-            </MDBContainer>
-        </div>
+            <MyModal />
+            <MyModal
+                headlineText=''
+                headlineBody='Only English is allowed'
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+                ButtonCloseText='Close'
+            />
+        </>
     )
 }
 

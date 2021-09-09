@@ -1,9 +1,3 @@
-.dayCard {
-  height: 100% !important;
-  background: transparent;
-  border: 2px solid black !important;
-  margin-bottom: 15px;
-}
-.dayCard h3 {
+.customCard h3 {
   font-size: large;
 }

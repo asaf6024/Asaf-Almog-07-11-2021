@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from 'react'
 import { Navbar, Container, Nav, NavItem } from 'react-bootstrap'
 import { useHistory } from 'react-router'
+import Theme from './Theme/Theme'
 // import { a } from "react-router-dom";
 import './nav.css'
 
 // Redux
 import { useSelector, useDispatch } from 'react-redux'
 import { getFavorites } from '../../redux/favorites/favorites-actions'
+import Degrees from './Degrees/Degrees'
 
 const NavPage = (props) => {
     let history = useHistory()
     const [active, setACtive] = useState('activea')
     const [bgDark, setBgDark] = useState(`inherit`)
+    const [color, setColor] = useState(`white`)
     const [themeIcon, setThemeIcon] = useState('fas fa-moon fa-2x')
     let favoritesState = useSelector((state) => state.favoritesReducer.favorites)
 
@@ -27,10 +30,12 @@ const NavPage = (props) => {
 
     const handleScroll = () => {
         if (window.scrollY > 40) {
-            setBgDark('#212529')
+            setBgDark('#2f00ff4f')
+            setColor('white')
             document.querySelector('.navItem').style.textShadow = 'none'
         } else {
             setBgDark(`inherit`)
+            setColor('white')
         }
     };
 
@@ -50,39 +55,41 @@ const NavPage = (props) => {
 
     }
 
-    const setTheme = () => {
-        if (themeIcon == 'fas fa-moon fa-2x') {
-            document.getElementById('root').classList.add('DarkTheme')
-            document.getElementById('root').classList.remove('WhiteTheme')
-            setThemeIcon('far fa-lightbulb fa-2x text-white')
-        }
-        else {
-            document.getElementById('root').classList.add('WhiteTheme')
-            document.getElementById('root').classList.remove('DarkTheme')
-            setThemeIcon('fas fa-moon fa-2x')
-        }
-    }
+    // const setTheme = () => {
+    //     if (themeIcon == 'fas fa-moon fa-2x') {
+    //         document.getElementById('root').classList.add('DarkTheme')
+    //         document.getElementById('root').classList.remove('WhiteTheme')
+    //         setThemeIcon('far fa-lightbulb fa-2x text-white')
+    //     }
+    //     else {
+    //         document.getElementById('root').classList.add('WhiteTheme')
+    //         document.getElementById('root').classList.remove('DarkTheme')
+    //         setThemeIcon('fas fa-moon fa-2x')
+    //     }
+    // }
     return (
-        <Navbar variant="dark" style={{ background: bgDark }} expand="lg" className='col-sm-12' id='navBar'>
+        <Navbar variant="dark" expand="lg" className='col-sm-12' id='navBar'>
             {/* <Container > */}
             {/* <Navbar.Brand href="/" className='col-sm-1'>My Portfolio</Navbar.Brand> */}
-            <Navbar.Brand href="/" className='col-sm-12 col-lg-9 font-weight-bold titleOfNav'>Herolo Weather Task - Asaf Almog</Navbar.Brand>
+            <Navbar.Brand href="/" className='col-sm-12 col-lg-7 font-weight-bold titleOfNav' style={{ color }}>Herolo Weather Task - Asaf Almog</Navbar.Brand>
             <Navbar.Toggle aria-controls="navbar-dark-example" />
-            <Navbar.Collapse id="navbar-dark-example" className='col-sm-12 col-lg-3 text-center'>
+            <Navbar.Collapse id="navbar-dark-example" className='col-sm-12 col-lg-5 text-center'>
                 <Nav className='text-left'>
                     <hr className='mobileHr' />
-                    <NavItem className='activeNav navItem' onClick={(e) => setActiveNav('/', 'landingNavItem')}>
+                    <NavItem className='activeNav navItem col-sm-12 col-lg-2' style={{ color }} onClick={(e) => setActiveNav('/', 'landingNavItem')}>
                         <span id='landingNavItem'> Home</span>
                     </NavItem>
                     <hr className='mobileHr' />
-                    <NavItem className='activeNav navItem' onClick={(e) => history.push('/food')} onClick={(e) => setActiveNav('/favorites', 'foodItem')}>
-                        <span id='foodItem' > Favorites&nbsp; {favoritesState.length > 0 && favoritesState.length}</span>
+                    <NavItem className='activeNav navItem col-sm-12 col-lg-4' style={{ color }} onClick={(e) => setActiveNav('/favorites', 'foodItem')}>
+                        <span id='foodItem' > Favorites&nbsp; </span>
+                        <sup className={`badge badge-pill `} style={{ background: '#2f00ff4f' }}>{favoritesState.length > 0 && favoritesState.length}</sup>
                     </NavItem>
                     <hr className='mobileHr' />
-                    <i className={`${themeIcon} text-center`} style={{ cursor: 'pointer' }}
+                    {/* <i className={`${themeIcon} text-center`} style={{ cursor: 'pointer' }}
                         onClick={() => setTheme()}
-                    ></i>
-
+                    ></i> */}
+                    <Theme className={`${themeIcon} text-center col-sm-12 col-lg-4`} color={color} />
+                    <Degrees className='col-sm-12 col-lg-2' />
                 </Nav>
             </Navbar.Collapse>
             {/* </Container> */}

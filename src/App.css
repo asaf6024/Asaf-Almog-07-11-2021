@@ -1,18 +1,31 @@
-#root {
-  /* background-image: url("./dist/img/myBackground2.jpg"); */
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: 50%;
-  background: url(./dist/img/backgroundImg.jpg) center center / cover no-repeat
-    fixed;
+.container {
   min-height: 100vh;
+  padding-top: 70px;
 }
-
 .CardOfWeather {
   padding: 15px;
 }
+.customCard {
+  height: 100% !important;
+  /* background: inherit !important; */
+  background: #2f00ff4f !important;
+  /* border: 2px solid black !important; */
+  margin-bottom: 15px;
+  color: black;
+}
+.customCard p,
+.customCard a,
+.customCard h2,
+.customCard h3,
+h1 {
+  color: white;
+}
 .marginAuto {
   margin: auto;
+}
+.fontVarianteSmallCaps {
+  font-variant: small-caps;
+  text-transform: lowercase;
 }
 .placesDiv {
   position: absolute;
@@ -22,7 +35,7 @@
 .cursorPointer {
   cursor: pointer;
 }
-.cityHeadline {
+.customHeadline {
   font-weight: 500;
 }
 

@@ -4,7 +4,7 @@ const initialState = {
 };
 
 export default function (state = initialState, action) {
-    console.log('action', action.payload)
+    // console.log('action', action.payload)
     switch (action.type) {
         case "GET_CURRENT_WEATHER":
             return { ...state, currentWeather: action.payload };

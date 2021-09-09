@@ -11,6 +11,16 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+#root {
+  /* background-image: url("./dist/img/myBackground2.jpg"); */
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50%;
+  background: url("./dist/img/backgroundImg2.jpg") center center / cover
+    no-repeat fixed;
+  min-height: 100vh;
+}
+
 .DarkTheme {
   background: black !important;
 }
@@ -22,7 +32,8 @@ code {
 .DarkTheme .footer,
 .DarkTheme i.far.fa-lightbulb.fa-2x,
 .DarkTheme .navItem,
-.DarkTheme input {
+.DarkTheme input,
+.DarkTheme label {
   color: #fff !important;
   background: black !important;
 }
@@ -34,7 +45,7 @@ code {
   background: black;
   border: 1px solid white;
 }
-.DarkTheme .dayCard,
+.DarkTheme .customCard,
 .DarkTheme .card {
   border: 1px solid white !important;
 }

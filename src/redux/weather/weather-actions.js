@@ -50,6 +50,8 @@ export const getCurrentWeather = (search) => {
 export const getForecast = (search) => async dispatch => {
     try {
         const res = await Api.get(`forecasts/v1/daily/5day/${search}?apikey=${process.env.REACT_APP_API_KEY}`)
+
+        // console.log('res is ', res)
         dispatch({
             type: 'GET_FORECAST',
             payload: res.data

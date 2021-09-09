@@ -1,5 +1,5 @@
 nav#navBar {
-  position: relative;
+  position: fixed;
   z-index: 3;
 }
 .nav-item {
@@ -19,7 +19,7 @@ nav#navBar {
   font-family: proxima-nova;
   font-style: normal;
   /* text-transform: uppercase; */
-  color: black !important;
+  color: white !important;
   text-shadow: -1px -1px 1px rgba(255, 255, 255, 0.1),
     1px 1px 1px rgba(0, 0, 0, 0.5);
   /* color: #fff; */
@@ -51,7 +51,7 @@ a {
     } */
 .navItem {
   cursor: pointer;
-  color: black;
+  color: white !important;
 }
 @media only screen and (max-width: 990px) {
   a.col-sm-1.navbar-brand {
@@ -101,7 +101,7 @@ a {
     display: block;
   }
   /* nav#navBar {
-    background: #212529 !important;
+    background: #2f00ff4f !important;
   } */
   .themeIcon {
     position: absolute;

@@ -1,88 +1,134 @@
 import Day from './Day/Day';
 import { MDBCard, MDBCol, MDBContainer, MDBRow } from 'mdbreact'
 import React, { useEffect, useState } from 'react'
-
+import { toFahrenheit } from 'celsius'
 import { useLocation } from "react-router-dom";
+import imagesOfWeather from '../../../dist/obj/imagesOfWeather';
 
-import currentOj from '../../../dist/obj/currentObj';
-import { toCelsius, toFahrenheit } from 'celsius'
+//fakeApi
+import { currentOj, onlineLocationObj } from '../../../dist/obj/fakeApi';
 
 // Redux
 import { useSelector, useDispatch } from 'react-redux'
-import { getForecast } from '../../../redux/weather/weather-actions';
+import { getForecast, getCurrentWeather } from '../../../redux/weather/weather-actions';
 import { addToFavorites, deleteFavoriteById } from '../../../redux/favorites/favorites-actions';
+import { getLocationByGeoposition } from '../../../redux/location/location-actions';
 
 const Forecast = (props) => {
     const dispatch = useDispatch()
-    const [current, setCurrent] = useState(null)
+    const [current, setCurrent] = useState([])
     const [heartIcon, setHeartIcon] = useState('far fa-heart')
     const [favoriteText, setFavoriteText] = useState('Add to Favorites')
-    let favoritesState = useSelector((state) => state.favoritesReducer.favorites)
-    let currentWeatherOfCity = useSelector((state) => state.weatherReducer.currentWeather)
-    let degreeState = useSelector((state) => state.degreesReducer.degree)
-
     const location = useLocation();
 
-    //*****set current weather from api - first useEffect******
+    let favoritesState = useSelector((state) => state.favoritesReducer.favorites)
+    let currentWeatherState = useSelector((state) => state.weatherReducer.currentWeather)
+    let forecastState = useSelector((state) => state.weatherReducer.forecast)
+    let degreeState = useSelector((state) => state.degreesReducer.degree)
+    let locationState = useSelector((state) => state.locationReducer.locations)
+
+    const apiCall = (city) => {
+        console.log('in apiCall', city)
+        // dispatch(getCurrentWeather(city))
+    }
+
+    // show location from SEARCH
     useEffect(() => {
-        // console.log('cityKey', props.cityKey)
 
-        //להפעיל את זה במקום  הסט שמתחת
-        // if (location.state != undefined && location.state != null)
-        //     apiCall(location.state.cityFromFavorites.cityKey)
-        // else
-        //     apiCall(props.cityKey)
+        if (location.state == undefined) {
 
-        //set to api obj
-        // dispatch(getForecast(props.cityKey)).then(() => {
-        //     setCurrent(props.currentWeather)
-        //     console.log('props.currentWeather', props.currentWeather)
-        // })
+            console.log('inside Searched location')
 
-        initialIcons();
-
-    }, [props.cityKey])
-
-    // const apiCall = (city) => {
-    //     dispatch(getForecast(city)).then(() => {
-    //         setCurrent(props.currentWeather)
-    //         console.log('props.currentWeather', props.currentWeather)
-    //     })
-    // }
-
-    // ////*****set current weather from api - second useEffect******
-    // useEffect(() => {
-    //     setCurrent(currentWeatherOfCity)
-    // })
-
-    //*****set current weather from object ******
-    useEffect(() => {
-        console.log('cityKey', props.cityKey)
-
-        if (location.state != undefined && location.state != null)
-            setCurrent([location.state.cityFromFavorites])
-        else
+            //**fake api**
             setCurrent(currentOj)
-        initialIcons()
 
-        if (props.cityName == '')
-            props.setCityName('Tel Aviv')
+            // ** api **
+            // apiCall(props.cityKey)
+
+            // if (props.cityName == '' && props.lat != '' & props.lon != '') {
+            //     console.log('inside Tel Aviv location')
+            //     props.setCityName('Tel Aviv, Israel')
+            //     props.setCountryId('IL')
+            // }
+
+            initialIcons()
+        }
 
     }, [props.cityKey, props.cityName])
 
-
-
-    //set Favorited item
+    // //*****set STATE from SEARCHED result******
     useEffect(() => {
-        // console.log('favoritest is ', favoritesState)
+        console.log('in searched result useffect state')
+
+        // //**fake api**
+        // setCurrent(currentOj)
+
+        //api
+        // setCurrent(currentWeatherState)
+
+    }, [currentWeatherState])
+
+
+    //show location from FAVORITE
+    useEffect(() => {
+        if (location.state != undefined) {
+            console.log('inside Favorite location')
+            setCurrent([location.state.cityFromFavorites])
+            props.setCityKey(location.state.cityFromFavorites.cityKey)
+            props.setCityName(location.state.cityFromFavorites.cityName)
+
+            //api
+            // apiCall(location.state.cityFromFavorites.cityKey)
+        }
+
+
+    }, [location.state])
+
+    //set STATE from Favorited result
+    useEffect(() => {
         favoritesState.map(f => {
-            if (f.Name == props.cityName) {
+            if (f.ID == props.cityKey) {
                 setHeartIcon('fas fa-heart')
                 setFavoriteText('Remove from Favorites')
             }
         })
+        //api
+        // setCurrent(currentWeatherState)
         localStorage.setItem('favoritesStorage', JSON.stringify(favoritesState));
+
+
     }, [favoritesState, props.cityName])
+
+
+    //show location from BROWSER Geolocation
+    useEffect(() => {
+
+        if (location.state == undefined) {
+
+            console.log('inside Online location')
+
+            //fake api
+            props.setCityKey(onlineLocationObj.Key)
+            props.setCityName(`${onlineLocationObj.LocalizedName}, ${onlineLocationObj.Country.LocalizedName}`)
+            props.setCountryId(onlineLocationObj.Country.ID)
+
+            //api
+            // dispatch(getLocationByGeoposition(props.lat, props.lon))
+
+        }
+
+    }, [props.lat, props.lon])
+
+    //*****set STATE from  Geolocation******
+    useEffect(() => {
+        // if (location.state == undefined) {
+        console.log('in Geolocation useffect state')
+        // props.setCityKey(locationState.Key)
+        // props.setCityName(locationState.LocalizedName)
+        // setCurrent(locationState)
+        // }
+    }, [locationState])
+
 
     const initialIcons = () => {
         setFavoriteText('Add to Favorites')
@@ -108,7 +154,8 @@ const Forecast = (props) => {
             CountryId: props.countryId,
             ID: props.cityKey,
             Name: props.cityName,
-            Current: document.getElementById('currentWeather').innerText
+            Current: document.getElementById('currentWeather').innerText,
+            Degrees: document.getElementById('degrees').innerText
         }
         dispatch(addToFavorites(favorite)).then(() => {
             // alert('add to favorites')
@@ -117,90 +164,96 @@ const Forecast = (props) => {
         })
     }
     return (
-        <div className='container-fluid'>
-            <MDBContainer>
+        <>
+            <MDBCard className='CardOfWeather col-sm-12 customCard' style={{ padding: '0' }}>
+                {
+                    current.length > 0 &&
+                    current.map((c, index) => {
+                        let nameOfCity = ''
+                        c.cityName != undefined ? nameOfCity = c.cityName : nameOfCity = props.cityName
 
-                <MDBCard className='CardOfWeather col-sm-12'>
+                        // console.log('props.countryId', c.CountryId)
+                        return <React.Fragment key={index}>
+                            <MDBRow>
 
-                    {/* {console.log('current', current)} */}
-                    {
-                        current != null &&
-                        current.map((c, index) => {
-                            console.log('props.countryId', c.CountryId)
-                            return <>
-                                <MDBRow key={index}>
-                                    <MDBCol sm='12' lg='4' className='text-center'>
+                                <MDBCol sm='12'>
+                                    <h3 className='customHeadline text-center marginAuto'> Today</h3>
+                                </MDBCol>
 
-                                        <h2 className='cityHeadline' style={{ fontSize: 'xxx-large' }}>
-                                            {c.cityName != undefined ? c.cityName : props.cityName}</h2>
-                                        {/* <img src={`https://www.countryflags.io/${c.CountryId != undefined ? c.CountryId : props.countryId}/flat/64.png`}>
-                                                        </img> */}
+                                <hr style={{ width: '100%' }} />
 
-                                        <p style={{ fontSize: 'x-large' }}>
-                                            {
-                                                degreeState == 'Celsius' ?
-                                                    <span> {c.Temperature.Metric.Value} <sup>°</sup></span>
-                                                    : <span>  {toFahrenheit(c.Temperature.Metric.Value)}<sup>℉</sup></span>
-                                            }
-                                        </p>
+                                <MDBCol sm='12' lg='4' className='text-center marginAuto'>
 
+                                    {
+                                        nameOfCity.split(',').map((n, i) => {
+                                            return i == 0 ?
+                                                <h2 key={`city${i}`} className='customHeadline'> {n}</h2>
+                                                : <h3 key={`country${i}`} className='fontVarianteSmallCaps customHeadline'>{n}</h3>
+                                        })
+                                    }
 
-                                    </MDBCol>
+                                    <img className='m0' src={`https://www.countryflags.io/${c.CountryId != undefined ? c.CountryId : props.countryId}/shiny/64.png`}>
+                                    </img>
 
-                                    <MDBCol sm='12' lg='4' className='text-center'>
+                                    <p style={{ fontSize: 'x-large' }}>
                                         {
-                                            c.WeatherText.includes('Sunny') ?
-                                                <i className="fas fa-sun fa-4x"></i>
-                                                : c.WeatherText.includes('cloud') ?
-                                                    c.WeatherText.includes('shower') ?
-                                                        <i className="fas fa-cloud-moon-rain fa-4x"></i>
-                                                        : <i className="fas fa-cloud-sun fa-4x"></i>
-                                                    : c.WeatherText.includes('Clowdy') ?
-                                                        <i className=" fas fa-cloud-sun fa-4x"></i>
-                                                        : ''
-
+                                            degreeState == 'Celsius' ?
+                                                <span><span id='degrees'> {c.Temperature.Metric.Value}</span><sup>°</sup></span>
+                                                : <span> <span id='degrees'>{toFahrenheit(c.Temperature.Metric.Value)}</span><sup>℉</sup></span>
                                         }
-                                        <h3 id='currentWeather' className='font-italic'>{c.WeatherText}</h3>
-                                    </MDBCol>
+                                    </p>
+                                </MDBCol>
 
-                                    <MDBCol sm='12' lg='4' className='text-center'>
+                                <MDBCol sm='12' lg='4' className='text-center marginAuto'>
+                                    {
+                                        imagesOfWeather.map((image, indexOfImg) => {
+                                            if (c.WeatherText.includes(`${image.type}`))
+                                            // if (c.WeatherText == image.type)
+                                            {
+                                                return <img
+                                                    key={indexOfImg}
+                                                    src={image.src}
+                                                    alt={image.alt} height="200"
+                                                    style={{ maxWidth: '100%' }
+                                                    } />
+                                            }
 
-                                        <p style={{ cursor: 'pointer' }}
-                                            onClick={() => addOrDeleteFavorite()}
-                                        ><i className={`${heartIcon} fa-2x`}></i>
-                                            <br />{favoriteText}</p>
-                                    </MDBCol>
+                                        })
+                                    }
 
-                                </MDBRow>
-                            </>
-                        })
+                                    {/* {
+                                    c.WeatherText.includes('Sunny') ?
+                                        <i className="fas fa-sun fa-4x"></i>
+                                        : c.WeatherText.includes('cloud') ?
+                                            c.WeatherText.includes('shower') ?
+                                                <i className="fas fa-cloud-moon-rain fa-4x"></i>
+                                                : <i className="fas fa-cloud-sun fa-4x"></i>
+                                            : c.WeatherText.includes('Clowdy') ?
+                                                <i className=" fas fa-cloud-sun fa-4x"></i>
+                                                : ''
 
-                    }
-                    <hr />
-                    <MDBRow>
-                        <Day cityKey={props.cityKey} />
-                    </MDBRow>
-                </MDBCard>
+                                } */}
+                                    <h3 id='currentWeather' className='font-italic'>{c.WeatherText}</h3>
+                                </MDBCol>
 
-            </MDBContainer>
-        </div>
+                                <MDBCol sm='12' lg='4' className='text-center marginAuto'>
+
+                                    <p style={{ cursor: 'pointer' }}
+                                        onClick={() => addOrDeleteFavorite()}
+                                    ><i className={`${heartIcon} fa-2x`}></i>
+                                        <br />{favoriteText}</p>
+                                </MDBCol>
+
+                            </MDBRow>
+                        </React.Fragment>
+                    })
+
+                }
+            </MDBCard>
+            <MDBRow>
+                <Day cityKey={props.cityKey} />
+            </MDBRow>
+        </>
     )
 }
-// const mapStateToProps = (state) => {
-//     return {
-//         currentWeather: state.weatherReducer.currentWeather,
-//         favorites: state.favoritesReducer.favorites
-//     };
-// };
-
-// const mapDispatchToProps = (dispatch) => {
-//     return bindActionCreators(
-//         {
-//             getForecast,
-//             addToFavorites
-//         },
-//         dispatch
-//     );
-// };
-// export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Weather))
 export default Forecast

@@ -37,3 +37,19 @@ export const getLocationsByName = (search) => async dispatch => {
         console.log(e);
     }
 }
+
+// https://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=vNjf3P6ACCNg5zBrUO7BFM0h9f0Dbv3h&q=32.38632,34.98642
+
+export const getLocationByGeoposition = (lat, lon) => async dispatch => {
+    try {
+        const res = await Api.get(`locations/v1/cities/geoposition/search?apikey=${process.env.REACT_APP_API_KEY}&q=${lat},${lon}`)
+        dispatch({
+            type: 'GET_LOCATION_BY_GEOPOSITION',
+            payload: res.data
+        })
+        return Promise.resolve();
+    }
+    catch (e) {
+        console.log(e);
+    }
+}
