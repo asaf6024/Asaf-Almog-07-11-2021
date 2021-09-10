@@ -1,4 +1,5 @@
 import Api from "../../utilis/Api";
+import { currentOj, onlineLocationObj } from '../../dist/obj/fakeApi';
 
 // https://dataservice.accuweather.com/currentconditions/v1//711822?apikey=vNjf3P6ACCNg5zBrUO7BFM0h9f0Dbv3h
 

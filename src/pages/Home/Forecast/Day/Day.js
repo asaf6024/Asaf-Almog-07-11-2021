@@ -48,38 +48,39 @@ const Day = (props) => {
                 weakWeather != undefined && weakWeather.length > 0 &&
                 weakWeather.map((w, index) => {
                     if (index > 0)
-                        counter += 0.8
+                        counter += 0.2
                     return <MDBCol sm='6' lg='2' className='marginAuto' key={index}>
-                        {/* <MDBAnimation type="fadeIn" delay={`${counter}s`} className="text-center" data-mdb-animation-start="onHover"> */}
+                        <MDBAnimation type="fadeIn" delay={`${counter}s`} className="text-center" data-mdb-animation-start="onHover">
 
-                        <MDBCard className='customCard'>
-                            <div className='marginAuto text-center'>
-                                <h3 className='font-weight-bolder'>{moment(w.Date).format('dddd')}</h3>
-                                {
-                                    imagesOfWeather.map((image, i) => {
-
-                                        if (w.Day.IconPhrase.includes(`${image.type}`))
-                                            return <img
-                                                key={i}
-                                                src={image.src}
-                                                alt={image.alt} height="100"
-                                                style={{ maxWidth: '100%' }
-                                                } />
-                                    })
-                                }
-                                <p className='font-italic'>
+                            <MDBCard className='customCard'>
+                                <div className='marginAuto text-center'>
+                                    <h3 className='font-weight-bolder'>{moment(w.Date).format('dddd')}</h3>
                                     {
-                                        degreeState == 'Celsius' ?
-                                            <p>{toCelsius(w.Temperature.Minimum.Value)}<sup>°</sup> -{toCelsius(w.Temperature.Maximum.Value)}<sup>°</sup> </p>
-                                            : <p> {w.Temperature.Minimum.Value}<sup>℉</sup>-{w.Temperature.Maximum.Value} <sup>℉</sup> </p>
+                                        imagesOfWeather.map((image, i) => {
+
+                                            if (w.Day.IconPhrase.includes(`${image.type}`))
+                                                return <img
+                                                    className='imageOfWeather'
+                                                    key={i}
+                                                    src={image.src}
+                                                    alt={image.alt} height="100"
+                                                    style={{ maxWidth: '100%' }
+                                                    } />
+                                        })
                                     }
-                                </p>
+                                    <p className='font-italic'>
+                                        {
+                                            degreeState == 'Celsius' ?
+                                                <p>{toCelsius(w.Temperature.Minimum.Value)}<sup>°</sup> -{toCelsius(w.Temperature.Maximum.Value)}<sup>°</sup> </p>
+                                                : <p> {w.Temperature.Minimum.Value}<sup>℉</sup>-{w.Temperature.Maximum.Value} <sup>℉</sup> </p>
+                                        }
+                                    </p>
 
-                                <a href={w.Link} target='_blank' title={w.Link}>Read More&nbsp; <i className="fas fa-angle-double-right"></i></a>
-                            </div>
+                                    <a href={w.Link} target='_blank' title={w.Link}>Read More&nbsp; <i className="fas fa-angle-double-right"></i></a>
+                                </div>
 
-                        </MDBCard>
-                        {/* </MDBAnimation> */}
+                            </MDBCard>
+                        </MDBAnimation>
 
                     </MDBCol>
                 })

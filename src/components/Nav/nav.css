@@ -117,4 +117,13 @@ a {
     text-align: center;
     transform: translateX(-50%) translateY(-50%);
   }
+  nav#navBar {
+    background: black !important;
+  }
+  img.imgOfDegree {
+    background: white;
+  }
+  .mobileHr {
+    border-bottom: 1px solid white;
+  }
 }

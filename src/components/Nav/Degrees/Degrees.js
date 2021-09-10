@@ -31,7 +31,7 @@ const Degrees = () => {
     }
 
     return (
-        <>
+        <div className='text-center degrees'>
             <MDBTooltip
                 domElement
                 tag="span"
@@ -53,7 +53,7 @@ const Degrees = () => {
                 ></img>
                 <span>Show degrees by Celsius</span>
             </MDBTooltip>
-        </>
+        </div>
     )
 }
 export default Degrees

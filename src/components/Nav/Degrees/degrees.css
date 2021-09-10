@@ -4,3 +4,6 @@
   margin: 5px;
   border-radius: 50%;
 }
+.degrees {
+  display: inline-flex;
+}

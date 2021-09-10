@@ -23,14 +23,14 @@ const Search = (props) => {
     const [displayFounded, setDisplayFounded] = useState('none')
     const [modalShow, setModalShow] = useState(false)
 
-    let suggestions = useSelector((state) => state.locationReducer.locations)
+    let locationState = useSelector((state) => state.locationReducer.location)
 
     //set location returned from api
     useEffect(() => {
-        // console.log('suggestions', suggestions)
-        setLocations(suggestions)
+        // console.log('locationState', locationState)
+        // setLocations(locationState)
 
-    }, [suggestions])
+    }, [locationState])
 
     //serach after 0.5 second of type
     const debounceFindCity = _.debounce((e) => {
@@ -51,8 +51,8 @@ const Search = (props) => {
         //**api**
         // dispatch(getLocationsByName(e.target.value)).then((res) => {
         //     setLoading(false)
-        //     // console.log('suggestions print', props.suggestions)
-        //     setLocations(suggestions)
+        //     // console.log('locationState print', props.locationState)
+        //     setLocations(locationState)
 
         // })
     }, 500);
@@ -95,16 +95,16 @@ const Search = (props) => {
                     {
                         locations != null && locations.length > 0 &&
                         <div className='locationsFounded text-center' style={{ display: displayFounded }}>
-                            {locations.slice(0, 10).map((l) => {
-                                return <p onClick={() => {
+                            {locations.slice(0, 10).map((l, index) => {
+                                return <p key={index} onClick={() => {
                                     props.setCityKey(l.Key)
                                     props.setCityName(`${l.LocalizedName}, ${l.Country.LocalizedName}`)
                                     props.setCountryId(l.Country.ID)
                                     setDisplayFounded('none')
 
                                 }}>
-                                    {l.LocalizedName},&nbsp;
-                                    {l.Country.LocalizedName}
+                                    <span className='font-weight-bolder'>{l.LocalizedName}</span>,&nbsp;
+                                    <span className='fontVarianteSmallCaps font-weight-bolder'> {l.Country.LocalizedName}</span>
                                 </p>
                             })
                             }

@@ -5,6 +5,9 @@ import { toFahrenheit } from 'celsius'
 import { useLocation } from "react-router-dom";
 import imagesOfWeather from '../../../dist/obj/imagesOfWeather';
 
+//css
+import './forecast.css'
+
 //fakeApi
 import { currentOj, onlineLocationObj } from '../../../dist/obj/fakeApi';
 
@@ -19,13 +22,14 @@ const Forecast = (props) => {
     const [current, setCurrent] = useState([])
     const [heartIcon, setHeartIcon] = useState('far fa-heart')
     const [favoriteText, setFavoriteText] = useState('Add to Favorites')
+    const [favoritedChanged, setFavoritedChanged] = useState(false)
     const location = useLocation();
 
     let favoritesState = useSelector((state) => state.favoritesReducer.favorites)
     let currentWeatherState = useSelector((state) => state.weatherReducer.currentWeather)
     let forecastState = useSelector((state) => state.weatherReducer.forecast)
     let degreeState = useSelector((state) => state.degreesReducer.degree)
-    let locationState = useSelector((state) => state.locationReducer.locations)
+    let geoPositionState = useSelector((state) => state.locationReducer.geoPosition)
 
     const apiCall = (city) => {
         console.log('in apiCall', city)
@@ -61,7 +65,7 @@ const Forecast = (props) => {
         console.log('in searched result useffect state')
 
         // //**fake api**
-        // setCurrent(currentOj)
+        setCurrent(currentOj)
 
         //api
         // setCurrent(currentWeatherState)
@@ -72,13 +76,14 @@ const Forecast = (props) => {
     //show location from FAVORITE
     useEffect(() => {
         if (location.state != undefined) {
-            console.log('inside Favorite location')
+            console.log('inside Favorite location',)
             setCurrent([location.state.cityFromFavorites])
             props.setCityKey(location.state.cityFromFavorites.cityKey)
             props.setCityName(location.state.cityFromFavorites.cityName)
 
             //api
             // apiCall(location.state.cityFromFavorites.cityKey)
+
         }
 
 
@@ -86,11 +91,22 @@ const Forecast = (props) => {
 
     //set STATE from Favorited result
     useEffect(() => {
+        console.log('insite favorite STATE')
+
+        let keyOfCity;
+        //set key from favorite
+        if (location.state != undefined)
+            keyOfCity = location.state.cityFromFavorites.cityKey
+        //set key from searched
+        else
+            keyOfCity = props.cityKey
+
         favoritesState.map(f => {
-            if (f.ID == props.cityKey) {
+            if (f.ID == keyOfCity && !favoritedChanged) {
                 setHeartIcon('fas fa-heart')
                 setFavoriteText('Remove from Favorites')
             }
+
         })
         //api
         // setCurrent(currentWeatherState)
@@ -123,11 +139,11 @@ const Forecast = (props) => {
     useEffect(() => {
         // if (location.state == undefined) {
         console.log('in Geolocation useffect state')
-        // props.setCityKey(locationState.Key)
-        // props.setCityName(locationState.LocalizedName)
-        // setCurrent(locationState)
+        // props.setCityKey(geoPositionState.Key)
+        // props.setCityName(geoPositionState.LocalizedName)
+        // setCurrent(geoPositionState)
         // }
-    }, [locationState])
+    }, [geoPositionState])
 
 
     const initialIcons = () => {
@@ -136,6 +152,7 @@ const Forecast = (props) => {
     }
 
     const addOrDeleteFavorite = () => {
+        setFavoritedChanged(true)
         if (favoriteText.includes('Add'))
             addFavorite()
         else
@@ -144,8 +161,10 @@ const Forecast = (props) => {
 
     const deleteFavorite = () => {
         dispatch(deleteFavoriteById(props.cityKey)).then(() => {
+            console.log('in delete')
             setHeartIcon('far fa-heart')
             setFavoriteText('Add to Favorites')
+
         })
     }
 
@@ -187,8 +206,11 @@ const Forecast = (props) => {
                                     {
                                         nameOfCity.split(',').map((n, i) => {
                                             return i == 0 ?
-                                                <h2 key={`city${i}`} className='customHeadline'> {n}</h2>
-                                                : <h3 key={`country${i}`} className='fontVarianteSmallCaps customHeadline'>{n}</h3>
+                                                <h2 key={`city${i}`} className='cityHeadline'> {n}</h2>
+                                                : <h3 key={`country${i}`}
+                                                    className='fontVarianteSmallCaps customHeadline countryHeadline'>
+                                                    {n}
+                                                </h3>
                                         })
                                     }
 
@@ -198,8 +220,12 @@ const Forecast = (props) => {
                                     <p style={{ fontSize: 'x-large' }}>
                                         {
                                             degreeState == 'Celsius' ?
-                                                <span><span id='degrees'> {c.Temperature.Metric.Value}</span><sup>°</sup></span>
-                                                : <span> <span id='degrees'>{toFahrenheit(c.Temperature.Metric.Value)}</span><sup>℉</sup></span>
+                                                <span><span id='degrees' className='degressOfToday'>{c.Temperature.Metric.Value}</span>
+                                                    <sup className='degressOfTodaySup'>°</sup>
+                                                </span>
+                                                : <span> <span id='degrees' className='degressOfToday'>{toFahrenheit(c.Temperature.Metric.Value)}</span>
+                                                    <sup className='degressOfTodaySup'>℉</sup>
+                                                </span>
                                         }
                                     </p>
                                 </MDBCol>
@@ -211,6 +237,7 @@ const Forecast = (props) => {
                                             // if (c.WeatherText == image.type)
                                             {
                                                 return <img
+                                                    className='imageOfWeather'
                                                     key={indexOfImg}
                                                     src={image.src}
                                                     alt={image.alt} height="200"

@@ -39,8 +39,8 @@ const FavoriteList = (props) => {
                 favoritesItems.length > 0 ?
                     favoritesItems.map(f => {
                         // console.log('f', f)
-                        return <MDBCol sm='12' lg='4' className='text-center marginAuto animated fadeIn animated fadeIn' >
-                            <MDBCard key={f.ID} style={{ margin: '15px' }} className='customCard cursorPointer' onClick={(e) => {
+                        return <MDBCol sm='12' lg='4' className='text-center marginAuto animated fadeIn animated fadeIn' key={f.ID}>
+                            <MDBCard style={{ margin: '15px' }} className='customCard cursorPointer' onClick={(e) => {
                                 // console.log('e', e.target.tagName)
                                 if (e.target.tagName != 'A' && e.target.tagName != 'I') {
                                     history.push({
@@ -76,11 +76,11 @@ const FavoriteList = (props) => {
                                 {
                                     f.Name.split(',').map((n, index) => {
                                         return index == 0 ?
-                                            <h2 key={index} className='customHeadline' style={{ marginTop: '50px' }}> {n}</h2>
+                                            <h2 key={`customHeadline${index}`} className='customHeadline' style={{ marginTop: '50px' }}> {n}</h2>
                                             :
                                             // <h3 className='fontVarianteSmallCaps customHeadline'>{n}</h3>
 
-                                            <div key={index} className="wrapper">
+                                            <div key={`wrapper${index}`} className="wrapper">
                                                 <div className="ribbon-wrapper-red">
                                                     <div className="ribbon-red"><span
                                                         style={n.length > 8 ? { fontSize: 'x-small' } : {}}
@@ -104,7 +104,8 @@ const FavoriteList = (props) => {
                                 {
                                     imagesOfWeather.map(image => {
                                         if (f.Current.includes(`${image.type}`)) {
-                                            return <img
+                                            return <img key={image.id}
+                                                className='imageOfWeather'
                                                 src={image.src}
                                                 alt={image.alt} height="50"
                                             />

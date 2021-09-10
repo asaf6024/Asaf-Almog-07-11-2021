@@ -1,0 +1,18 @@
+.cityHeadline {
+  font-size: 54px;
+  letter-spacing: -0.7px;
+  font-weight: 500;
+  line-height: 1.07;
+}
+.degressOfToday {
+  font-size: 44px;
+  letter-spacing: -0.7px;
+  font-weight: 500;
+  line-height: 1.07;
+}
+.degressOfTodaySup {
+  font-size: 30px;
+  letter-spacing: -0.7px;
+  font-weight: 500;
+  line-height: 1.07;
+}

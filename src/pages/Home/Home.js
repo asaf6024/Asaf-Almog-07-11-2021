@@ -6,18 +6,18 @@ import { MDBContainer } from 'mdbreact'
 
 const Home = () => {
     const [cityKey, setCityKey] = useState(null)
-    const [cityName, setCityName] = useState('')
-    const [countryId, setCountryId] = useState('')
+    const [cityName, setCityName] = useState('711822')
+    const [countryId, setCountryId] = useState('Tel Aviv, Israel')
     const [lat, setLat] = useState('')
     const [lon, setLon] = useState('')
 
     useEffect(() => {
-        // if (lat != '') {
-        setCityKey(711822)
-        setCityName('Tel Aviv, Israel')
-        // }
+        // console.log('lat', lat)
+        if (lat == '') {
+            setCityKey(711822)
+            setCityName('Tel Aviv, Israel')
+        }
 
-        // if (lat != '' && lng != '')
     }, [])
 
 
@@ -26,7 +26,7 @@ const Home = () => {
     //     // console.log('lon', lon)
     // }, [lat, lon])
     return (
-        <div className='container-fluid'>
+        <div className='container-fluid animated fadeIn'>
             <MDBContainer>
                 <h1 className='text-center font-weight-bold'> Weather Forecast</h1>
                 <Geolocation

@@ -12,6 +12,7 @@
   /* border: 2px solid black !important; */
   margin-bottom: 15px;
   color: black;
+  border-radius: 5px !important;
 }
 .customCard p,
 .customCard a,
@@ -44,5 +45,8 @@ h1 {
     display: block;
     border-bottom: 1px solid black;
     width: 100%;
+  }
+  .imageOfWeather {
+    height: 50px;
   }
 }

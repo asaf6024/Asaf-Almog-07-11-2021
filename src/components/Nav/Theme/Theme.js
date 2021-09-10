@@ -17,7 +17,7 @@ const Theme = (props) => {
     }
 
     return (
-        <div className='custom-control custom-switch'>
+        <div className='custom-control custom-switch marginAuto'>
             <input
                 type='checkbox'
                 className='custom-control-input'

@@ -23,6 +23,7 @@ const NavPage = (props) => {
         window.addEventListener("scroll", handleScroll);
         setACtive('home')
 
+        document.getElementById('homeItem').classList.add('activeLink')
         // props.get_chart()
         // if (window.scrollY > 20)
         //     document.getElementById('navBar').style.background = '#212529'
@@ -30,7 +31,7 @@ const NavPage = (props) => {
 
     const handleScroll = () => {
         if (window.scrollY > 40) {
-            setBgDark('#2f00ff4f')
+            setBgDark('black')
             setColor('white')
             document.querySelector('.navItem').style.textShadow = 'none'
         } else {
@@ -68,7 +69,7 @@ const NavPage = (props) => {
     //     }
     // }
     return (
-        <Navbar variant="dark" expand="lg" className='col-sm-12' id='navBar'>
+        <Navbar variant="dark" style={{ background: bgDark }} expand="lg" className='col-sm-12' id='navBar'>
             {/* <Container > */}
             {/* <Navbar.Brand href="/" className='col-sm-1'>My Portfolio</Navbar.Brand> */}
             <Navbar.Brand href="/" className='col-sm-12 col-lg-7 font-weight-bold titleOfNav' style={{ color }}>Herolo Weather Task - Asaf Almog</Navbar.Brand>
@@ -76,12 +77,14 @@ const NavPage = (props) => {
             <Navbar.Collapse id="navbar-dark-example" className='col-sm-12 col-lg-5 text-center'>
                 <Nav className='text-left'>
                     <hr className='mobileHr' />
-                    <NavItem className='activeNav navItem col-sm-12 col-lg-2' style={{ color }} onClick={(e) => setActiveNav('/', 'landingNavItem')}>
-                        <span id='landingNavItem'> Home</span>
+                    <NavItem className='activeNav navItem col-sm-12 col-lg-2 text-center'
+                        style={{ color }} onClick={(e) => setActiveNav('/', 'homeItem')}>
+                        <span id='homeItem'> Home</span>
                     </NavItem>
                     <hr className='mobileHr' />
-                    <NavItem className='activeNav navItem col-sm-12 col-lg-4' style={{ color }} onClick={(e) => setActiveNav('/favorites', 'foodItem')}>
-                        <span id='foodItem' > Favorites&nbsp; </span>
+                    <NavItem className='activeNav navItem col-sm-12 col-lg-4 text-center'
+                        style={{ color }} onClick={(e) => setActiveNav('/favorites', 'favoriteItem')}>
+                        <span id='favoriteItem' > Favorites&nbsp; </span>
                         <sup className={`badge badge-pill `} style={{ background: '#2f00ff4f' }}>{favoritesState.length > 0 && favoritesState.length}</sup>
                     </NavItem>
                     <hr className='mobileHr' />
@@ -89,6 +92,7 @@ const NavPage = (props) => {
                         onClick={() => setTheme()}
                     ></i> */}
                     <Theme className={`${themeIcon} text-center col-sm-12 col-lg-4`} color={color} />
+                    <hr className='mobileHr' />
                     <Degrees className='col-sm-12 col-lg-2' />
                 </Nav>
             </Navbar.Collapse>
