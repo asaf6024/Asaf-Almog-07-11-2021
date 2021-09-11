@@ -53,6 +53,9 @@ a {
   cursor: pointer;
   color: white !important;
 }
+label.custom-control-label.customHeadline.cursorPointer {
+  top: -10px !important;
+}
 @media only screen and (max-width: 990px) {
   a.col-sm-1.navbar-brand {
     width: 10%;

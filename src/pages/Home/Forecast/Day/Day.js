@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { MDBCard, MDBCol, MDBAnimation } from 'mdbreact'
 import moment from "moment";
-import { toCelsius, toFahrenheit } from 'celsius'
+import { toCelsius } from 'celsius'
+
+//css
 import './day.css'
 
 //fake api
-import { fiveDays } from '../../../../dist/obj/fakeApi';
+// import { fiveDays } from '../../../../dist/obj/fakeApi';
+
+//object
 import imagesOfWeather from '../../../../dist/obj/imagesOfWeather';
 
 // Redux
@@ -14,24 +18,27 @@ import { getForecast } from '../../../../redux/weather/weather-actions'
 
 const Day = (props) => {
 
-    const [city, setCity] = useState('')
     const [weakWeather, setWeakWeather] = useState([])
+    let counter = 0
     const dispatch = useDispatch()
+
+    //redux states
     let forecastState = useSelector((state) => state.weatherReducer.forecast)
     let degreeState = useSelector((state) => state.degreesReducer.degree)
-    let counter = 0
 
     //*****set weather from api - first useEffect******
     useEffect(() => {
-        console.log('Day city', props.cityKey)
-        dispatch(getForecast(props.cityKey))
+        // console.log('Day city', props.cityKey)
+        dispatch(getForecast(props.cityKey != null ? props.cityKey : '711822'))
 
     }, [props.cityKey])
 
     //*****set weather from api - second useEffect******
     useEffect(() => {
-        setWeakWeather(forecastState.DailyForecasts)
-        console.log('forecastState', forecastState.DailyForecasts)
+        if (forecastState != undefined) {
+            setWeakWeather(forecastState.DailyForecasts)
+        }
+
     }, [forecastState])
 
 
@@ -47,10 +54,12 @@ const Day = (props) => {
             {
                 weakWeather != undefined && weakWeather.length > 0 &&
                 weakWeather.map((w, index) => {
-                    // console.log('w', w)
+
                     let count = 0
+
                     if (index > 0)
                         counter += 0.2
+
                     return <MDBCol sm='6' lg='2' className='marginAuto' key={index}>
                         <MDBAnimation type="fadeIn" delay={`${counter}s`} className="text-center" data-mdb-animation-start="onHover">
 
@@ -61,6 +70,7 @@ const Day = (props) => {
                                         imagesOfWeather.map((image, i) => {
 
                                             if (w.Day.IconPhrase.includes(`${image.type}`) && count == 0) {
+
                                                 count++
 
                                                 return <img
@@ -70,13 +80,13 @@ const Day = (props) => {
                                                     alt={image.alt} height="100"
                                                     style={{ maxWidth: '100%' }
                                                     } />
-
                                             }
-
                                         })
                                     }
                                     <br />
-                                    <span className='text-white font-weight-bolder' style={{ fontSize: 'small' }}>{w.Day.IconPhrase}</span>
+                                    <span className='text-white font-weight-bolder'
+                                        style={{ fontSize: 'small' }}>{w.Day.IconPhrase}
+                                    </span>
 
                                     <p className='font-italic'>
                                         {

@@ -11,25 +11,10 @@ const Home = () => {
     const [lat, setLat] = useState('')
     const [lon, setLon] = useState('')
 
-    useEffect(() => {
-        // console.log('lat', lat)
-        if (lat == '') {
-            // setCityKey(711822)
-            // setCityName('Tel Aviv, Israel')
-            // setCountryId('IL')
-        }
-
-    }, [])
-
-
-    // useEffect(() => {
-    //     // console.log('lat', lat)
-    //     // console.log('lon', lon)
-    // }, [lat, lon])
     return (
         <div className='container-fluid animated fadeIn'>
             <MDBContainer>
-                <h1 className='text-center font-weight-bold'> Weather Forecast</h1>
+                <h1 className='text-center font-weight-bold'>Weather Forecast</h1>
                 <Geolocation
                     setLat={setLat}
                     setLon={setLon}

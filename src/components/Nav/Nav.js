@@ -71,14 +71,14 @@ const NavPage = (props) => {
             <Navbar.Brand href="/" className='col-sm-12 col-lg-7 font-weight-bold titleOfNav' style={{ color }}>Herolo Weather Task - Asaf Almog</Navbar.Brand>
             <Navbar.Toggle aria-controls="navbar-dark-example" />
             <Navbar.Collapse id="navbar-dark-example" className='col-sm-12 col-lg-5 text-center'>
-                <Nav className='text-left'>
+                <Nav className='text-left row'>
                     <hr className='mobileHr' />
-                    <NavItem className='activeNav navItem col-sm-12 col-lg-2 text-center'
+                    <NavItem className='navItem col-sm-12 col-lg-2 text-center'
                         style={{ color }} onClick={(e) => setActiveNav('/', 'homeItem')}>
                         <span id='homeItem'> Home</span>
                     </NavItem>
                     <hr className='mobileHr' />
-                    <NavItem className='activeNav navItem col-sm-12 col-lg-3 text-center'
+                    <NavItem className='navItem col-sm-12 col-lg-3 text-center'
                         style={{ color }} onClick={(e) => setActiveNav('/favorites', 'favoriteItem')}>
                         <span id='favoriteItem' > Favorites&nbsp; </span>
                         <sup className={`badge badge-pill `} style={{ background: '#2f00ff4f' }}>{favoritesState.length > 0 && favoritesState.length}</sup>
@@ -87,11 +87,11 @@ const NavPage = (props) => {
                     {/* <i className={`${themeIcon} text-center`} style={{ cursor: 'pointer' }}
                         onClick={() => setTheme()}
                     ></i> */}
-                    <NavItem className='activeNav navItem col-sm-12 col-lg-2 text-center'>
+                    <NavItem className='navItem col-sm-12 col-lg-3 text-left'>
                         <Theme className={`text-center`} color={color} />
                     </NavItem>
                     <hr className='mobileHr' />
-                    <NavItem className='activeNav navItem col-sm-12 col-lg-3 text-right'>
+                    <NavItem className='navItem col-sm-12 col-lg-2 text-center'>
                         <Degrees color={color} />
                     </NavItem>
                 </Nav>

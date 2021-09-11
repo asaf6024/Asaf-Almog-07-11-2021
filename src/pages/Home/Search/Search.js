@@ -2,23 +2,24 @@ import { MDBCol, MDBRow, MDBIcon } from 'mdbreact'
 import React, { useState, useEffect } from 'react'
 import _ from "lodash";
 import { useHistory } from 'react-router-dom';
+
+//components
 import MyModal from '../../../components/Modal/MyModal'
+
+//css
 import './search.css'
 
 //fakeApi
-// import cityObj from '../../../dist/obj/cityObj';
-import { cityObj } from '../../../dist/obj/fakeApi';
+// import { cityObj } from '../../../dist/obj/fakeApi';
 
 // Redux
 import { useSelector, useDispatch } from 'react-redux'
 import { getLocationsByName } from '../../../redux/location/location-actions'
-import Spinner from '../../../components/Spinner/Spinner'
 
 const Search = (props) => {
 
     const dispatch = useDispatch()
     const history = useHistory()
-    const [loading, setLoading] = useState(true)
     const [locations, setLocations] = useState([])
     const [displayFounded, setDisplayFounded] = useState('none')
     const [modalShow, setModalShow] = useState(false)
@@ -34,7 +35,7 @@ const Search = (props) => {
 
     }, [locationState])
 
-    //serach after 0.5 second of type
+    //serach after 0.5 second of typing
     const debounceFindCity = _.debounce((e) => {
 
         props.setLat('')
@@ -52,9 +53,6 @@ const Search = (props) => {
 
         //**api**
         dispatch(getLocationsByName(e.target.value)).then((res) => {
-            setLoading(false)
-            // console.log('locationState print', props.locationState)
-            setLocations(locationState)
 
         })
     }, 500);
@@ -63,9 +61,9 @@ const Search = (props) => {
         const regex = /^[a-zA-Z0-9 ]/;
         const chars = e.target.value.split('');
         const char = chars.pop();
+
         if (!regex.test(char)) {
             e.target.value = chars.join('');
-            // return alert(`${char} is not a valid character.`);
             setModalShow(true)
         }
         else
@@ -79,17 +77,13 @@ const Search = (props) => {
                         <MDBIcon icon="search" />
                         <input className="form-control w-100"
                             type="text" placeholder="Search" aria-label="Search"
-                            // value={search}
                             onChange={(e) =>
                                 validateEnglishLetters(e)
                             }
-                            onFocus={(e) => locations.length > 0 ?
+                            onFocus={(e) => locations != null && locations.length > 0 ?
                                 validateEnglishLetters(e)
                                 : setDisplayFounded('none')
                             }
-
-
-
                         />
                     </form>
                 </MDBCol>
@@ -99,8 +93,13 @@ const Search = (props) => {
                 <MDBCol sm='12'>
                     {
                         locations != null && locations.length > 0 &&
-                        <div className='locationsFounded text-center animated fadeIn'
-                            style={{ display: displayFounded }}>
+                        <div className='locationsFounded text-center'
+                            style={
+                                locations.length < 2 ? { marginTop: '5px', display: displayFounded } :
+                                    locations.length < 4 ? { marginTop: '35px', display: displayFounded } :
+                                        locations.length < 8 ? { top: '65px', display: displayFounded } :
+                                            locations.length < 15 ? { top: '180px', display: displayFounded } : ''}
+                        >
                             <i className="fas fa-window-close fa-2x cursorPointer"
                                 style={{ position: 'absolute', right: '0', top: '0' }}
                                 onClick={() => setDisplayFounded('none')}
@@ -111,7 +110,6 @@ const Search = (props) => {
                                     props.setCityName(`${l.LocalizedName}, ${l.Country.LocalizedName}`)
                                     props.setCountryId(l.Country.ID)
                                     setDisplayFounded('none')
-
                                 }}>
                                     <span className='font-weight-bolder'>{l.LocalizedName}</span>,&nbsp;
                                     <span className='fontVarianteSmallCaps font-weight-bolder'> {l.Country.LocalizedName}</span>

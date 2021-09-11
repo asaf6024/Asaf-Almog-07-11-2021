@@ -31,9 +31,6 @@ const Geolocation = (props) => {
 
         function error() {
             status.textContent = 'Unable to retrieve your location';
-
-            // setCityKey(711822)
-            // setCityName('Tel Aviv, Israel')
         }
 
         if (!navigator.geolocation) {

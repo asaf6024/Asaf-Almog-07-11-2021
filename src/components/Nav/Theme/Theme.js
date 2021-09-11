@@ -26,6 +26,7 @@ const Theme = (props) => {
                 onChange={handleSwitchChange()}
                 readOnly
             />
+            <br />
             <label className='custom-control-label customHeadline cursorPointer' htmlFor='customSwitches'
                 style={{ fontVariant: 'small-caps', color: props.color }}>
                 darkmode

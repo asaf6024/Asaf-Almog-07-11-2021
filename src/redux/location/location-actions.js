@@ -48,7 +48,6 @@ export const getLocationByGeoposition = (lat, lon) => async dispatch => {
     try {
         // **api**
         const res = await Api.get(`locations/v1/cities/geoposition/search?apikey=${process.env.REACT_APP_API_KEY}&q=${lat},${lon}`)
-
         dispatch({
             type: 'GET_LOCATION_BY_GEOPOSITION',
             payload: res.data
