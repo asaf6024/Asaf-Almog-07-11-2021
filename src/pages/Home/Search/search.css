@@ -7,6 +7,7 @@ i.fa.fa-search {
   display: none;
 }
 .locationsFounded {
+  padding: 0 5px 0 5px;
   position: absolute;
   z-index: 1;
   background: white;
@@ -19,8 +20,9 @@ i.fa.fa-search {
   -webkit-transform: translateX(-50%) translateY(-50%);
   transform: translateX(-50%) translateY(-50%);
 }
+.locationsFounded p:hover,
 .locationsFounded p:hover {
   cursor: pointer;
-  background: black;
+  background: rgba(47, 0, 255, 0.31);
   color: white;
 }

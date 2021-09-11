@@ -6,16 +6,17 @@ import { MDBContainer } from 'mdbreact'
 
 const Home = () => {
     const [cityKey, setCityKey] = useState(null)
-    const [cityName, setCityName] = useState('711822')
-    const [countryId, setCountryId] = useState('Tel Aviv, Israel')
+    const [cityName, setCityName] = useState('')
+    const [countryId, setCountryId] = useState('')
     const [lat, setLat] = useState('')
     const [lon, setLon] = useState('')
 
     useEffect(() => {
         // console.log('lat', lat)
         if (lat == '') {
-            setCityKey(711822)
-            setCityName('Tel Aviv, Israel')
+            // setCityKey(711822)
+            // setCityName('Tel Aviv, Israel')
+            // setCountryId('IL')
         }
 
     }, [])
@@ -32,6 +33,8 @@ const Home = () => {
                 <Geolocation
                     setLat={setLat}
                     setLon={setLon}
+                    setCityKey={setCityKey}
+                    setCityName={setCityName}
                 />
                 {/* <Degrees /> */}
                 <Search

@@ -33,7 +33,7 @@ const Forecast = (props) => {
 
     const apiCall = (city) => {
         console.log('in apiCall', city)
-        // dispatch(getCurrentWeather(city))
+        dispatch(getCurrentWeather(city))
     }
 
     // show location from SEARCH
@@ -44,16 +44,19 @@ const Forecast = (props) => {
             console.log('inside Searched location')
 
             //**fake api**
-            setCurrent(currentOj)
+            // setCurrent(currentOj)
 
-            // ** api **
-            // apiCall(props.cityKey)
+            console.log('props.cityKey', props.cityKey)
+            //initial Tel Aviv Location
+            if (props.cityName == '' && props.lat == '' & props.lon == '') {
 
-            // if (props.cityName == '' && props.lat != '' & props.lon != '') {
-            //     console.log('inside Tel Aviv location')
-            //     props.setCityName('Tel Aviv, Israel')
-            //     props.setCountryId('IL')
-            // }
+                // ** api **
+                apiCall(props.cityKey != null ? props.cityKey : '711822')
+
+                console.log('initial Tel Aviv location')
+                props.setCityName('Tel Aviv, Israel')
+                props.setCountryId('IL')
+            }
 
             initialIcons()
         }
@@ -62,13 +65,15 @@ const Forecast = (props) => {
 
     // //*****set STATE from SEARCHED result******
     useEffect(() => {
-        console.log('in searched result useffect state')
+        if (location.state == undefined) {
+            console.log('in searched result useffect state')
 
-        // //**fake api**
-        setCurrent(currentOj)
+            //**fake api**
+            // setCurrent(currentOj)
 
-        //api
-        // setCurrent(currentWeatherState)
+            //**api**
+            setCurrent(currentWeatherState)
+        }
 
     }, [currentWeatherState])
 
@@ -76,73 +81,88 @@ const Forecast = (props) => {
     //show location from FAVORITE
     useEffect(() => {
         if (location.state != undefined) {
-            console.log('inside Favorite location',)
-            setCurrent([location.state.cityFromFavorites])
+            console.log('inside Favorite location', location.state)
+
+            //**fake api** set state from FAVORITES page (only when fake api)
+            // setCurrent([location.state.cityFromFavorites])
+
             props.setCityKey(location.state.cityFromFavorites.cityKey)
             props.setCityName(location.state.cityFromFavorites.cityName)
 
-            //api
-            // apiCall(location.state.cityFromFavorites.cityKey)
+            //**api**
+            apiCall(location.state.cityFromFavorites.cityKey)
 
         }
-
 
     }, [location.state])
 
     //set STATE from Favorited result
     useEffect(() => {
-        console.log('insite favorite STATE')
+        if (props.cityName != '') {
 
-        let keyOfCity;
-        //set key from favorite
-        if (location.state != undefined)
-            keyOfCity = location.state.cityFromFavorites.cityKey
-        //set key from searched
-        else
-            keyOfCity = props.cityKey
+            console.log('insite favorite STATE', props.cityName)
 
-        favoritesState.map(f => {
-            if (f.ID == keyOfCity && !favoritedChanged) {
-                setHeartIcon('fas fa-heart')
-                setFavoriteText('Remove from Favorites')
+            let keyOfCity;
+
+            //set key from favorite & state from api
+            if (location.state != undefined) {
+                keyOfCity = location.state.cityFromFavorites.cityKey
+
+                console.log('api set STATE for favorite')
+
+                //**api** result
+                setCurrent(currentWeatherState)
             }
+            //set key from searched
+            else
+                keyOfCity = props.cityKey
 
-        })
-        //api
-        // setCurrent(currentWeatherState)
-        localStorage.setItem('favoritesStorage', JSON.stringify(favoritesState));
 
+
+            favoritesState.map(f => {
+                if (f.ID == keyOfCity && !favoritedChanged) {
+                    setHeartIcon('fas fa-heart')
+                    setFavoriteText('Remove from Favorites')
+                }
+
+            })
+
+            localStorage.setItem('favoritesStorage', JSON.stringify(favoritesState));
+
+        }
 
     }, [favoritesState, props.cityName])
 
 
-    //show location from BROWSER Geolocation
+    //show location from GEOLOCATION
     useEffect(() => {
 
-        if (location.state == undefined) {
+        if (location.state == undefined && props.lat != '' & props.lon != '') {
 
             console.log('inside Online location')
 
-            //fake api
-            props.setCityKey(onlineLocationObj.Key)
-            props.setCityName(`${onlineLocationObj.LocalizedName}, ${onlineLocationObj.Country.LocalizedName}`)
-            props.setCountryId(onlineLocationObj.Country.ID)
+            //**fake api**
+            // props.setCityKey(onlineLocationObj.Key)
+            // props.setCityName(`${onlineLocationObj.LocalizedName}, ${onlineLocationObj.Country.LocalizedName}`)
+            // props.setCountryId(onlineLocationObj.Country.ID)
 
-            //api
-            // dispatch(getLocationByGeoposition(props.lat, props.lon))
+            //**api**
+            dispatch(getLocationByGeoposition(props.lat, props.lon))
 
         }
 
     }, [props.lat, props.lon])
 
-    //*****set STATE from  Geolocation******
+    //*****set STATE from GEOLOCATION******
     useEffect(() => {
-        // if (location.state == undefined) {
-        console.log('in Geolocation useffect state')
-        // props.setCityKey(geoPositionState.Key)
-        // props.setCityName(geoPositionState.LocalizedName)
-        // setCurrent(geoPositionState)
-        // }
+        if (location.state == undefined && props.lat != '' & props.lon != '') {
+            console.log('in Geolocation useffect state')
+
+            //**api**
+            props.setCityKey(geoPositionState.Key)
+            props.setCityName(geoPositionState.LocalizedName)
+            setCurrent(geoPositionState)
+        }
     }, [geoPositionState])
 
 
@@ -161,7 +181,7 @@ const Forecast = (props) => {
 
     const deleteFavorite = () => {
         dispatch(deleteFavoriteById(props.cityKey)).then(() => {
-            console.log('in delete')
+            // console.log('in delete')
             setHeartIcon('far fa-heart')
             setFavoriteText('Add to Favorites')
 
@@ -199,14 +219,14 @@ const Forecast = (props) => {
                                     <h3 className='customHeadline text-center marginAuto'> Today</h3>
                                 </MDBCol>
 
-                                <hr style={{ width: '100%' }} />
-
                                 <MDBCol sm='12' lg='4' className='text-center marginAuto'>
 
                                     {
                                         nameOfCity.split(',').map((n, i) => {
                                             return i == 0 ?
-                                                <h2 key={`city${i}`} className='cityHeadline'> {n}</h2>
+                                                <h2 key={`city${i}`}
+                                                    style={n.length > 8 ? { fontSize: '30px' } : {}}
+                                                    className='cityHeadline'> {n}</h2>
                                                 : <h3 key={`country${i}`}
                                                     className='fontVarianteSmallCaps customHeadline countryHeadline'>
                                                     {n}
@@ -214,20 +234,11 @@ const Forecast = (props) => {
                                         })
                                     }
 
-                                    <img className='m0' src={`https://www.countryflags.io/${c.CountryId != undefined ? c.CountryId : props.countryId}/shiny/64.png`}>
+                                    <img className='m0'
+                                        alt={c.CountryId != undefined ? c.CountryId : props.countryId}
+                                        src={`https://www.countryflags.io/${c.CountryId != undefined ? c.CountryId : props.countryId}/shiny/64.png`}>
                                     </img>
 
-                                    <p style={{ fontSize: 'x-large' }}>
-                                        {
-                                            degreeState == 'Celsius' ?
-                                                <span><span id='degrees' className='degressOfToday'>{c.Temperature.Metric.Value}</span>
-                                                    <sup className='degressOfTodaySup'>°</sup>
-                                                </span>
-                                                : <span> <span id='degrees' className='degressOfToday'>{toFahrenheit(c.Temperature.Metric.Value)}</span>
-                                                    <sup className='degressOfTodaySup'>℉</sup>
-                                                </span>
-                                        }
-                                    </p>
                                 </MDBCol>
 
                                 <MDBCol sm='12' lg='4' className='text-center marginAuto'>
@@ -240,7 +251,7 @@ const Forecast = (props) => {
                                                     className='imageOfWeather'
                                                     key={indexOfImg}
                                                     src={image.src}
-                                                    alt={image.alt} height="200"
+                                                    alt={image.alt} height="150"
                                                     style={{ maxWidth: '100%' }
                                                     } />
                                             }
@@ -260,7 +271,22 @@ const Forecast = (props) => {
                                                 : ''
 
                                 } */}
-                                    <h3 id='currentWeather' className='font-italic'>{c.WeatherText}</h3>
+
+
+                                    <p id='currentWeather' className='font-wight-bolder'>{c.WeatherText}</p>
+
+
+                                    <p style={{ fontSize: 'x-large' }}>
+                                        {
+                                            degreeState == 'Celsius' ?
+                                                <span><span id='degrees' className='degressOfToday'>{c.Temperature.Metric.Value}</span>
+                                                    <sup className='degressOfTodaySup'> °</sup>
+                                                </span>
+                                                : <span> <span id='degrees' className='degressOfToday'>{toFahrenheit(c.Temperature.Metric.Value)}</span>
+                                                    <sup className='degressOfTodaySup'> ℉</sup>
+                                                </span>
+                                        }
+                                    </p>
                                 </MDBCol>
 
                                 <MDBCol sm='12' lg='4' className='text-center marginAuto'>

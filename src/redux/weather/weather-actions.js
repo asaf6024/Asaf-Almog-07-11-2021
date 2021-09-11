@@ -10,7 +10,7 @@ export const getCurrentWeather = (search) => {
             .get(`currentconditions/v1/${search}?apikey=${process.env.REACT_APP_API_KEY}`)
             .then((res) => {
                 if (res.data) {
-                    console.log('Weather Res', res)
+                    // console.log('Weather Res', res)
                     dispatch({
                         type: "GET_CURRENT_WEATHER",
                         payload: res.data,

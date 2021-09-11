@@ -15,7 +15,7 @@ function App() {
           <Route exact path="/" component={Home} />
           <Route exact path="/favorites" component={Favorites} />
         </Switch>
-        {/* <Footer /> */}
+        <Footer />
       </Router>
     </div>
   );

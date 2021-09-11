@@ -3,7 +3,9 @@ import './footer.css'
 const Footer = () => {
     return (
         <div className="footer">
-            <p>This site created by <a className='text-white' target='_blank' href='https://github.com/asaf6024'> @Asaf Almog 2021</a></p>
+            <p>This site created by <a className='text-white' target='_blank'
+                rel="noreferrer"
+                href='https://github.com/asaf6024'> @Asaf Almog 2021</a></p>
         </div>
     )
 }

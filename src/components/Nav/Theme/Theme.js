@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 const Theme = (props) => {
     const [switch1, setswitch1] = useState(false)
@@ -26,9 +26,9 @@ const Theme = (props) => {
                 onChange={handleSwitchChange()}
                 readOnly
             />
-            <label className='custom-control-label customHeadline' htmlFor='customSwitches'
+            <label className='custom-control-label customHeadline cursorPointer' htmlFor='customSwitches'
                 style={{ fontVariant: 'small-caps', color: props.color }}>
-                dark mode
+                darkmode
             </label>
         </div>
     );

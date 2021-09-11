@@ -16,3 +16,7 @@
   font-weight: 500;
   line-height: 1.07;
 }
+.degressOfToday,
+degressOfTodaySup {
+  font-style: italic;
+}

@@ -2,7 +2,10 @@ import { MDBCard, MDBCol, MDBRow } from "mdbreact";
 import React, { useEffect, useState } from "react";
 import { useHistory } from 'react-router-dom';
 import imagesOfWeather from "../../../dist/obj/imagesOfWeather";
-import { toCelsius, toFahrenheit } from 'celsius'
+import { toFahrenheit } from 'celsius'
+import _ from "lodash";
+import { MDBTooltip } from 'mdbreact'
+
 // Redux
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from "react-router-dom";
@@ -29,10 +32,18 @@ const FavoriteList = (props) => {
 
 
     const deleteFavorite = (id) => {
+        document.getElementById(`favoritecard${id}`).classList.add('fadeOut')
+        debounceDeleteFavorite(id)
+    }
+
+    //serach after 0.5 second of type
+    const debounceDeleteFavorite = _.debounce((id) => {
+
         dispatch(deleteFavoriteById(id)).then(() => {
+            // 
             setFavoritesItems(favoritesState)
         })
-    }
+    }, 500);
     return (
         <MDBRow>
             {
@@ -40,9 +51,12 @@ const FavoriteList = (props) => {
                     favoritesItems.map(f => {
                         // console.log('f', f)
                         return <MDBCol sm='12' lg='4' className='text-center marginAuto animated fadeIn animated fadeIn' key={f.ID}>
-                            <MDBCard style={{ margin: '15px' }} className='customCard cursorPointer' onClick={(e) => {
-                                // console.log('e', e.target.tagName)
-                                if (e.target.tagName != 'A' && e.target.tagName != 'I') {
+                            <MDBCard id={`favoritecard${f.ID}`} style={{ margin: '15px' }} className='customCard cursorPointer animated' onClick={(e) => {
+                                // console.log('e', e.target.className)
+                                if (e.target.className != 'card__overlay'
+                                    && e.target.className != 'card__description bg-danger'
+                                    && e.target.tagName != 'A'
+                                    && e.target.tagName != 'I') {
                                     history.push({
                                         pathname: '/',
                                         state: {
@@ -82,7 +96,7 @@ const FavoriteList = (props) => {
 
                                             <div key={`wrapper${index}`} className="wrapper">
                                                 <div className="ribbon-wrapper-red">
-                                                    <div className="ribbon-red"><span
+                                                    <div className="ribbon-country"><span className='fontVarianteSmallCaps'
                                                         style={n.length > 8 ? { fontSize: 'x-small' } : {}}
                                                     >{n}</span></div>
 
@@ -131,13 +145,22 @@ const FavoriteList = (props) => {
                                                     : ''
                                     } */}
                                 {/* <br /> */}
-                                <div className="card__overlay" onClick={() => deleteFavorite(f.ID)}>
+                                <div className="card__overlay">
                                     <div className='card__description bg-danger'>
                                         <a
                                             className='trashLink'
 
                                         >
-                                            <i className="fas fa-trash animated fadeInLeft"></i>
+                                            <MDBTooltip
+                                                domElement
+                                                tag="span"
+                                                placement="top"
+                                            >
+                                                <i className="fas fa-trash animated fadeIn text-white" onClick={() => deleteFavorite(f.ID)}></i>
+
+                                                <span>Delete</span>
+                                            </MDBTooltip>
+
                                         </a>
                                     </div>
                                 </div>

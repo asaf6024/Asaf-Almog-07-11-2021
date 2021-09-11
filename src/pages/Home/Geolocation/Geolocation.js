@@ -31,6 +31,9 @@ const Geolocation = (props) => {
 
         function error() {
             status.textContent = 'Unable to retrieve your location';
+
+            // setCityKey(711822)
+            // setCityName('Tel Aviv, Israel')
         }
 
         if (!navigator.geolocation) {
@@ -49,7 +52,7 @@ const Geolocation = (props) => {
         <div style={{ display: 'none' }}>
             <button id="find-me">Show my location</button><br />
             <p id="status"></p>
-            <a id="map-link" target="_blank"></a>
+            <a id="map-link" target="_blank" rel="noreferrer"></a>
         </div>
     )
 }

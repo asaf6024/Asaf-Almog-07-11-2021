@@ -85,6 +85,9 @@ const Search = (props) => {
                                 validateEnglishLetters(e)
                                 : setDisplayFounded('none')
                             }
+
+
+
                         />
                     </form>
                 </MDBCol>
@@ -94,7 +97,12 @@ const Search = (props) => {
                 <MDBCol sm='12'>
                     {
                         locations != null && locations.length > 0 &&
-                        <div className='locationsFounded text-center' style={{ display: displayFounded }}>
+                        <div className='locationsFounded text-center animated fadeIn'
+                            style={{ display: displayFounded }}>
+                            <i className="fas fa-window-close fa-2x cursorPointer"
+                                style={{ position: 'absolute', right: '0', top: '0' }}
+                                onClick={() => setDisplayFounded('none')}
+                            ></i>
                             {locations.slice(0, 10).map((l, index) => {
                                 return <p key={index} onClick={() => {
                                     props.setCityKey(l.Key)

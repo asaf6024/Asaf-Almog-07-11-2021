@@ -2,7 +2,7 @@ import React from "react";
 import { MDBTooltip } from 'mdbreact'
 // Redux
 import { useSelector, useDispatch } from 'react-redux'
-import { deleteFavorites } from '../../redux/favorites/favorites-actions'
+import { deleteFavorites } from '../../../redux/favorites/favorites-actions'
 
 const DeleteAllFavorites = () => {
     const dispatch = useDispatch()
@@ -20,7 +20,7 @@ const DeleteAllFavorites = () => {
                         onClick={() => dispatch(deleteFavorites()).then(() => {
                             localStorage.removeItem('favoritesStorage')
                         })}
-                        className="fas fa-trash fa-3x cursorPointer">
+                        className="fas fa-trash fa-3x cursorPointer text-white">
 
                     </i>
                     <span>Delete all Favorites</span>

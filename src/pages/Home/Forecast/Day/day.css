@@ -1,3 +1,7 @@
 .customCard h3 {
   font-size: large;
 }
+.readMoreLink:hover {
+  color: white;
+  font-weight: bolder;
+}

@@ -1,27 +1,23 @@
 import React, { useState, useEffect } from 'react'
-import { Navbar, Container, Nav, NavItem } from 'react-bootstrap'
+import { Navbar, Nav, NavItem } from 'react-bootstrap'
 import { useHistory } from 'react-router'
 import Theme from './Theme/Theme'
 // import { a } from "react-router-dom";
 import './nav.css'
 
 // Redux
-import { useSelector, useDispatch } from 'react-redux'
-import { getFavorites } from '../../redux/favorites/favorites-actions'
+import { useSelector } from 'react-redux'
 import Degrees from './Degrees/Degrees'
 
 const NavPage = (props) => {
     let history = useHistory()
-    const [active, setACtive] = useState('activea')
     const [bgDark, setBgDark] = useState(`inherit`)
     const [color, setColor] = useState(`white`)
-    const [themeIcon, setThemeIcon] = useState('fas fa-moon fa-2x')
     let favoritesState = useSelector((state) => state.favoritesReducer.favorites)
 
     useEffect(() => {
 
         window.addEventListener("scroll", handleScroll);
-        setACtive('home')
 
         document.getElementById('homeItem').classList.add('activeLink')
         // props.get_chart()
@@ -82,7 +78,7 @@ const NavPage = (props) => {
                         <span id='homeItem'> Home</span>
                     </NavItem>
                     <hr className='mobileHr' />
-                    <NavItem className='activeNav navItem col-sm-12 col-lg-4 text-center'
+                    <NavItem className='activeNav navItem col-sm-12 col-lg-3 text-center'
                         style={{ color }} onClick={(e) => setActiveNav('/favorites', 'favoriteItem')}>
                         <span id='favoriteItem' > Favorites&nbsp; </span>
                         <sup className={`badge badge-pill `} style={{ background: '#2f00ff4f' }}>{favoritesState.length > 0 && favoritesState.length}</sup>
@@ -91,9 +87,13 @@ const NavPage = (props) => {
                     {/* <i className={`${themeIcon} text-center`} style={{ cursor: 'pointer' }}
                         onClick={() => setTheme()}
                     ></i> */}
-                    <Theme className={`${themeIcon} text-center col-sm-12 col-lg-4`} color={color} />
+                    <NavItem className='activeNav navItem col-sm-12 col-lg-2 text-center'>
+                        <Theme className={`text-center`} color={color} />
+                    </NavItem>
                     <hr className='mobileHr' />
-                    <Degrees className='col-sm-12 col-lg-2' />
+                    <NavItem className='activeNav navItem col-sm-12 col-lg-3 text-right'>
+                        <Degrees color={color} />
+                    </NavItem>
                 </Nav>
             </Navbar.Collapse>
             {/* </Container> */}

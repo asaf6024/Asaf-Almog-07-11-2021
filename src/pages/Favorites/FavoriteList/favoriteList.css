@@ -53,7 +53,7 @@
   left: -3px;
 }
 
-.ribbon-red {
+.ribbon-country {
   font: bold 15px Sans-Serif;
   color: #fff;
   text-align: center;
@@ -68,22 +68,23 @@
   left: -5px;
   top: 15px;
   width: 120px;
-  background-color: #ea181e;
+  /* background-color: #ea181e; */
+  background-color: #00000021;
   background-image: -webkit-gradient(
     linear,
     left top,
     left bottom,
-    from(#ea181e),
-    to(#b90005)
+    from(#00000021),
+    to(#00000021)
   );
-  background-image: -webkit-linear-gradient(top, #ea181e, #b90005);
+  background-image: -webkit-linear-gradient(top, #00000021, #00000021);
   background-image: -moz-linear-gradient(top, #bfdc7a, #8ebf45);
   background-image: -ms-linear-gradient(top, #bfdc7a, #8ebf45);
   background-image: -o-linear-gradient(top, #bfdc7a, #8ebf45);
   color: #fff;
-  -webkit-box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+  /* -webkit-box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
   -moz-box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
-  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3); */
 }
 
 .ribbon-green {
@@ -103,10 +104,10 @@
   width: 120px;
 }
 
-.ribbon-red:before,
-.ribbon-red:after {
+.ribbon-country:before,
+.ribbon-country:after {
   content: "";
-  border-top: 3px solid #b90005;
+  /* border-top: 3px solid #b90005; */
   border-left: 3px solid transparent;
   border-right: 3px solid transparent;
   position: absolute;
@@ -123,14 +124,14 @@
   bottom: -3px;
 }
 
-.ribbon-red:before {
+.ribbon-country:before {
   left: 0;
 }
 .ribbon-green:before {
   right: 0;
 }
 
-.ribbon-red:after {
+.ribbon-country:after {
   right: 0;
 }
 .ribbon-green:after {

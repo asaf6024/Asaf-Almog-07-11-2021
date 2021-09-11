@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react'
-import { MDBCol, MDBRow, MDBTooltip } from 'mdbreact'
+import { MDBTooltip } from 'mdbreact'
 import './degrees.css'
 
 // Redux
 import { useSelector, useDispatch } from 'react-redux'
-import { getDegrees, updateDegrees } from '../../../redux/degrees/degrees-actions'
+import { updateDegrees } from '../../../redux/degrees/degrees-actions'
 
-const Degrees = () => {
+const Degrees = (props) => {
     const [fahrenheitImg, setFahrenheitImg] = useState('')
     const [celsiusImg, setCelsiusImg] = useState('')
     const dispatch = useDispatch()
     let degreeState = useSelector((state) => state.degreesReducer.degree)
 
     useEffect(() => {
-        if (degreeState == 'Celsius')
+        if (degreeState === 'Celsius')
             setDegreesToCelsius()
         else
             setDegreesToFahrenheit()
@@ -37,7 +37,10 @@ const Degrees = () => {
                 tag="span"
                 placement="bottom"
             >
-                <img className='imgOfDegree cursorPointer DegreesDiv' src={`../img/${fahrenheitImg}.png`}
+                <img className='imgOfDegree cursorPointer DegreesDiv'
+                    alt='fahrenheit'
+                    src={`../img/${fahrenheitImg}.png`}
+                    style={{ background: props.color }}
                     onClick={() => setDegreesToFahrenheit()}
                 ></img>
                 <span>Show degrees by Fahrenheit</span>
@@ -48,7 +51,10 @@ const Degrees = () => {
                 tag="span"
                 placement="bottom"
             >
-                <img className='imgOfDegree cursorPointer DegreesDiv' src={`../img/${celsiusImg}.png`}
+                <img className='imgOfDegree cursorPointer DegreesDiv'
+                    alt='celsius'
+                    src={`../img/${celsiusImg}.png`}
+                    style={{ background: props.color }}
                     onClick={() => setDegreesToCelsius()}
                 ></img>
                 <span>Show degrees by Celsius</span>

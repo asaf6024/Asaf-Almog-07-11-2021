@@ -31,9 +31,8 @@ code {
 .DarkTheme .card,
 .DarkTheme .footer,
 .DarkTheme i.far.fa-lightbulb.fa-2x,
-.DarkTheme .navItem,
-.DarkTheme input,
-.DarkTheme label {
+.DarkTheme .customCard:hover,
+.DarkTheme input {
   color: #fff !important;
   background: black !important;
 }
@@ -57,6 +56,10 @@ code {
 }
 .DarkTheme .mobileHr {
   border-bottom: 1px solid white;
+}
+.DarkTheme .locationsFounded p:hover {
+  background: white !important;
+  color: black !important;
 }
 .WhiteTheme {
   background: white;
