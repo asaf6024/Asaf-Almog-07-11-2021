@@ -22,25 +22,25 @@ const Day = (props) => {
     let counter = 0
 
     //*****set weather from api - first useEffect******
-    // useEffect(() => {
-    //     console.log('Day city', props.cityKey)
-    //     dispatch(getForecast(props.cityKey))
+    useEffect(() => {
+        console.log('Day city', props.cityKey)
+        dispatch(getForecast(props.cityKey))
 
-    // }, [props.cityKey])
+    }, [props.cityKey])
 
     //*****set weather from api - second useEffect******
-    // useEffect(() => {
-    //     setWeakWeather(forecastState.DailyForecasts)
-    //     console.log('forecastState', forecastState.DailyForecasts)
-    // }, [forecastState])
+    useEffect(() => {
+        setWeakWeather(forecastState.DailyForecasts)
+        console.log('forecastState', forecastState.DailyForecasts)
+    }, [forecastState])
 
 
     //*****set weather from fake api ******
-    useEffect(() => {
-        // console.log('fiveDays', fiveDays)
-        setWeakWeather(fiveDays)
+    // useEffect(() => {
+    //     // console.log('fiveDays', fiveDays)
+    //     setWeakWeather(fiveDays)
 
-    }, [fiveDays])
+    // }, [fiveDays])
 
     return (
         <>

@@ -28,7 +28,9 @@ const Search = (props) => {
     //set location returned from api
     useEffect(() => {
         // console.log('locationState', locationState)
-        // setLocations(locationState)
+
+        //**api**
+        setLocations(locationState)
 
     }, [locationState])
 
@@ -46,15 +48,15 @@ const Search = (props) => {
         })
 
         // //**fake api**
-        setLocations(cityObj)
+        // setLocations(cityObj)
 
         //**api**
-        // dispatch(getLocationsByName(e.target.value)).then((res) => {
-        //     setLoading(false)
-        //     // console.log('locationState print', props.locationState)
-        //     setLocations(locationState)
+        dispatch(getLocationsByName(e.target.value)).then((res) => {
+            setLoading(false)
+            // console.log('locationState print', props.locationState)
+            setLocations(locationState)
 
-        // })
+        })
     }, 500);
 
     const validateEnglishLetters = (e) => {

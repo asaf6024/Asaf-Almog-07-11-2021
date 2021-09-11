@@ -206,60 +206,60 @@ const Forecast = (props) => {
         <>
             <MDBCard className='CardOfWeather col-sm-12 customCard' style={{ padding: '0' }}>
                 {
-                    current.length > 0 &&
-                    current.map((c, index) => {
-                        let nameOfCity = ''
-                        c.cityName != undefined ? nameOfCity = c.cityName : nameOfCity = props.cityName
+                    current.length > 0 ?
+                        current.map((c, index) => {
+                            let nameOfCity = ''
+                            c.cityName != undefined ? nameOfCity = c.cityName : nameOfCity = props.cityName
 
-                        // console.log('props.countryId', c.CountryId)
-                        return <React.Fragment key={index}>
-                            <MDBRow>
+                            // console.log('props.countryId', c.CountryId)
+                            return <React.Fragment key={index}>
+                                <MDBRow>
 
-                                <MDBCol sm='12'>
-                                    <h3 className='customHeadline text-center marginAuto'> Today</h3>
-                                </MDBCol>
+                                    <MDBCol sm='12'>
+                                        <h3 className='customHeadline text-center marginAuto'> Today</h3>
+                                    </MDBCol>
 
-                                <MDBCol sm='12' lg='4' className='text-center marginAuto'>
+                                    <MDBCol sm='12' lg='4' className='text-center marginAuto'>
 
-                                    {
-                                        nameOfCity.split(',').map((n, i) => {
-                                            return i == 0 ?
-                                                <h2 key={`city${i}`}
-                                                    style={n.length > 8 ? { fontSize: '30px' } : {}}
-                                                    className='cityHeadline'> {n}</h2>
-                                                : <h3 key={`country${i}`}
-                                                    className='fontVarianteSmallCaps customHeadline countryHeadline'>
-                                                    {n}
-                                                </h3>
-                                        })
-                                    }
+                                        {
+                                            nameOfCity.split(',').map((n, i) => {
+                                                return i == 0 ?
+                                                    <h2 key={`city${i}`}
+                                                        style={n.length > 8 ? { fontSize: '30px' } : {}}
+                                                        className='cityHeadline'> {n}</h2>
+                                                    : <h3 key={`country${i}`}
+                                                        className='fontVarianteSmallCaps customHeadline countryHeadline'>
+                                                        {n}
+                                                    </h3>
+                                            })
+                                        }
 
-                                    <img className='m0'
-                                        alt={c.CountryId != undefined ? c.CountryId : props.countryId}
-                                        src={`https://www.countryflags.io/${c.CountryId != undefined ? c.CountryId : props.countryId}/shiny/64.png`}>
-                                    </img>
+                                        <img className='m0'
+                                            alt={c.CountryId != undefined ? c.CountryId : props.countryId}
+                                            src={`https://www.countryflags.io/${c.CountryId != undefined ? c.CountryId : props.countryId}/shiny/64.png`}>
+                                        </img>
 
-                                </MDBCol>
+                                    </MDBCol>
 
-                                <MDBCol sm='12' lg='4' className='text-center marginAuto'>
-                                    {
-                                        imagesOfWeather.map((image, indexOfImg) => {
-                                            if (c.WeatherText.includes(`${image.type}`))
-                                            // if (c.WeatherText == image.type)
-                                            {
-                                                return <img
-                                                    className='imageOfWeather'
-                                                    key={indexOfImg}
-                                                    src={image.src}
-                                                    alt={image.alt} height="150"
-                                                    style={{ maxWidth: '100%' }
-                                                    } />
-                                            }
+                                    <MDBCol sm='12' lg='4' className='text-center marginAuto'>
+                                        {
+                                            imagesOfWeather.map((image, indexOfImg) => {
+                                                if (c.WeatherText.includes(`${image.type}`))
+                                                // if (c.WeatherText == image.type)
+                                                {
+                                                    return <img
+                                                        className='imageOfWeather'
+                                                        key={indexOfImg}
+                                                        src={image.src}
+                                                        alt={image.alt} height="150"
+                                                        style={{ maxWidth: '100%' }
+                                                        } />
+                                                }
 
-                                        })
-                                    }
+                                            })
+                                        }
 
-                                    {/* {
+                                        {/* {
                                     c.WeatherText.includes('Sunny') ?
                                         <i className="fas fa-sun fa-4x"></i>
                                         : c.WeatherText.includes('cloud') ?
@@ -273,34 +273,36 @@ const Forecast = (props) => {
                                 } */}
 
 
-                                    <p id='currentWeather' className='font-wight-bolder'>{c.WeatherText}</p>
+                                        <p id='currentWeather' className='font-wight-bolder'>{c.WeatherText}</p>
 
 
-                                    <p style={{ fontSize: 'x-large' }}>
-                                        {
-                                            degreeState == 'Celsius' ?
-                                                <span><span id='degrees' className='degressOfToday'>{c.Temperature.Metric.Value}</span>
-                                                    <sup className='degressOfTodaySup'> °</sup>
-                                                </span>
-                                                : <span> <span id='degrees' className='degressOfToday'>{toFahrenheit(c.Temperature.Metric.Value)}</span>
-                                                    <sup className='degressOfTodaySup'> ℉</sup>
-                                                </span>
-                                        }
-                                    </p>
-                                </MDBCol>
+                                        <p style={{ fontSize: 'x-large' }}>
+                                            {
+                                                degreeState == 'Celsius' ?
+                                                    <span><span id='degrees' className='degressOfToday'>{c.Temperature.Metric.Value}</span>
+                                                        <sup className='degressOfTodaySup'> °</sup>
+                                                    </span>
+                                                    : <span> <span id='degrees' className='degressOfToday'>{toFahrenheit(c.Temperature.Metric.Value)}</span>
+                                                        <sup className='degressOfTodaySup'> ℉</sup>
+                                                    </span>
+                                            }
+                                        </p>
+                                    </MDBCol>
 
-                                <MDBCol sm='12' lg='4' className='text-center marginAuto'>
+                                    <MDBCol sm='12' lg='4' className='text-center marginAuto'>
 
-                                    <p style={{ cursor: 'pointer' }}
-                                        onClick={() => addOrDeleteFavorite()}
-                                    ><i className={`${heartIcon} fa-2x`}></i>
-                                        <br />{favoriteText}</p>
-                                </MDBCol>
+                                        <p style={{ cursor: 'pointer' }}
+                                            onClick={() => addOrDeleteFavorite()}
+                                        ><i className={`${heartIcon} fa-2x`}></i>
+                                            <br />{favoriteText}</p>
+                                    </MDBCol>
 
-                            </MDBRow>
-                        </React.Fragment>
-                    })
-
+                                </MDBRow>
+                            </React.Fragment>
+                        })
+                        : <MDBCard className='CardOfWeather col-sm-12' style={{ padding: '0' }}>
+                            <h2 className='text-center text-dark'>Access blocked<br />Please trty later</h2>
+                        </MDBCard>
                 }
             </MDBCard>
             <MDBRow>
