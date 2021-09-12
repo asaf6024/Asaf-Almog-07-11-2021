@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { MDBTooltip } from 'mdbreact'
+
+//css
 import './degrees.css'
 
 // Redux
@@ -10,6 +12,8 @@ const Degrees = (props) => {
     const [fahrenheitImg, setFahrenheitImg] = useState('')
     const [celsiusImg, setCelsiusImg] = useState('')
     const dispatch = useDispatch()
+
+    //redux STATE
     let degreeState = useSelector((state) => state.degreesReducer.degree)
 
     useEffect(() => {
@@ -20,13 +24,22 @@ const Degrees = (props) => {
     }, [degreeState])
 
     const setDegreesToFahrenheit = () => {
+
+        //set images
         setFahrenheitImg('fahrenheitFull')
         setCelsiusImg('celsiusEmpty')
+
+        //update state
         dispatch(updateDegrees('Fahrenheit'))
     }
+
     const setDegreesToCelsius = () => {
+
+        //set images
         setFahrenheitImg('fahrenheitEmpty')
         setCelsiusImg('celsiusFull')
+
+        //update state
         dispatch(updateDegrees('Celsius'))
     }
 
@@ -57,7 +70,9 @@ const Degrees = (props) => {
                     style={{ background: props.color }}
                     onClick={() => setDegreesToCelsius()}
                 ></img>
+
                 <span>Show degrees by Celsius</span>
+
             </MDBTooltip>
         </div>
     )

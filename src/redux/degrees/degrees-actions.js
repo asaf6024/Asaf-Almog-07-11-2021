@@ -1,11 +1,12 @@
 export const getDegrees = () => {
+
     return (dispatch) => {
-        // console.log('in getFavorites')
         dispatch({
             type: "GET_DEGREES"
         });
         return Promise.resolve();
     }
+
 };
 
 export const updateDegrees = (degree) => {
@@ -17,6 +18,7 @@ export const updateDegrees = (degree) => {
         });
         return Promise.resolve();
     }
+
 };
 
 

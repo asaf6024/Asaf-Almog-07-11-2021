@@ -3,8 +3,10 @@ import React, { useEffect } from "react";
 const Geolocation = (props) => {
 
     useEffect(() => {
+
         document.querySelector('#find-me').addEventListener('click', geoFindMe);
         geoFindMe()
+
     }, [])
 
     const geoFindMe = () => {
@@ -31,6 +33,10 @@ const Geolocation = (props) => {
 
         function error() {
             status.textContent = 'Unable to retrieve your location';
+
+            props.setLon(34.781769)
+            props.setLat(32.085300)
+
         }
 
         if (!navigator.geolocation) {

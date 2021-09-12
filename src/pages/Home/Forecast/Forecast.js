@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 
 import { MDBCard, MDBCol, MDBRow } from 'mdbreact'
 import { toFahrenheit } from 'celsius'
@@ -41,76 +41,65 @@ const Forecast = (props) => {
 
     //set current state when result returns from api
     useEffect(() => {
-        setCurrent(currentWeatherState)
+        console.log('current', current)
+
+        if (currentWeatherState != undefined)
+            setCurrent(currentWeatherState)
+
     }, [getCurrentWeather])
 
     const apiCall = (city) => {
-        // console.log('in apiCall', city)
+
         if (city != null && city != undefined)
             debounceApi(city)
-
     }
 
     //api call after 0.5 seconds
     const debounceApi = _.debounce((city) => {
 
         dispatch(getCurrentWeather(city)).then(() => {
-            // console.log('current', current)
 
-            // if (currentWeatherState != undefined)
-            //     setCurrent(currentWeatherState)
+            if (currentWeatherState != undefined)
+                setCurrent(currentWeatherState)
         })
+
     }, 500);
 
-    // show location from input SEARCH
+    //initial api call for SEARCHED location 
     useEffect(() => {
 
         if (location.state == undefined) {
 
-            // console.log('inside Searched location')
+            console.log('inside Searched location', geoPositionState)
 
             //**fake api**
             // setCurrent(currentOj)
 
-            //initial Tel Aviv Location
+            //initial Location to Tel Aviv 
             if (props.cityName == '' && props.lat == '' & props.lon == '') {
 
                 // ** api **
                 apiCall(props.cityKey != null ? props.cityKey : '215854')
-
                 props.setCityName('Tel Aviv, Israel')
                 props.setCountryId('IL')
             }
-            else
+
+            //initial Location to city from geolocation / searched
+            else if (props.cityKey != undefined) {
+                // ** api **
                 apiCall(props.cityKey)
+            }
 
             initialIcons()
         }
 
     }, [props.cityKey, props.cityName])
 
-    // //*****set STATE from input SEARCHED result******
-    // useEffect(() => {
-    //     if (location.state == undefined) {
-    //         console.log('in searched result useffect state', currentWeatherState)
 
-    //         //**fake api**
-    //         // setCurrent(currentOj)
-
-    //         // if (currentWeatherState != undefined)
-    //         //     // ** api **
-    //         //     setCurrent(currentWeatherState)
-
-
-    //     }
-
-    // }, [currentWeatherState])
-
-
-    //show location from FAVORITE
+    //initial api call for FAVORITE location (when navigate from favorite page)
     useEffect(() => {
+
         if (location.state != undefined) {
-            // console.log('inside Favorite location', location.state)
 
             //**fake api** set state from FAVORITES page (only when fake api)
 
@@ -124,11 +113,9 @@ const Forecast = (props) => {
 
     }, [location.state])
 
-    //set STATE from Favorited result
+    //set STATE if city includes in Favorites
     useEffect(() => {
         if (props.cityName != '') {
-
-            // console.log('insite favorite STATE', props.cityName)
 
             let keyOfCity;
 
@@ -137,10 +124,12 @@ const Forecast = (props) => {
                 keyOfCity = location.state.cityFromFavorites.cityKey
                 props.setCountryId(location.state.cityFromFavorites.CountryId)
             }
+
             //set key from searched
             else
                 keyOfCity = props.cityKey
 
+            //update icons 
             favoritesState.map(f => {
                 if (f.ID == keyOfCity && !favoritedChanged) {
                     setHeartIcon('fas fa-heart')
@@ -149,6 +138,7 @@ const Forecast = (props) => {
 
             })
 
+            //update local storage
             localStorage.setItem('favoritesStorage', JSON.stringify(favoritesState));
 
         }
@@ -156,12 +146,10 @@ const Forecast = (props) => {
     }, [favoritesState, props.cityName])
 
 
-    //show location from GEOLOCATION
+    //initial api call for GEOLOCATION bt lat & lon
     useEffect(() => {
 
-        if (location.state == undefined && props.lat != '' & props.lon != '') {
-
-            // console.log('inside Online location')
+        if (location.state == undefined && props.lat != '' & props.lon != '' && geoPositionState != undefined) {
 
             //**fake api**
             // props.setCityKey(onlineLocationObj.Key)
@@ -175,15 +163,14 @@ const Forecast = (props) => {
 
     }, [props.lat, props.lon])
 
-    //*****set STATE from GEOLOCATION******
+    //set STATE from GEOLOCATION
     useEffect(() => {
         if (location.state == undefined && props.lat != '' & props.lon != '') {
-            // console.log('in Geolocation useffect state', geoPositionState)
 
             //**api**
             props.setCityKey(geoPositionState.Key)
             props.setCityName(geoPositionState.LocalizedName)
-            apiCall(geoPositionState.Key)
+
         }
     }, [geoPositionState])
 
@@ -203,13 +190,13 @@ const Forecast = (props) => {
 
     const deleteFavorite = () => {
         dispatch(deleteFavoriteById(props.cityKey)).then(() => {
-            // console.log('in delete')
             setHeartIcon('far fa-heart')
             setFavoriteText('Add to Favorites')
         })
     }
 
     const addFavorite = () => {
+
         let favorite = {
             CountryId: props.countryId,
             ID: props.cityKey,
@@ -217,11 +204,12 @@ const Forecast = (props) => {
             Current: document.getElementById('currentWeather').innerText,
             Degrees: document.getElementById('degrees').innerText
         }
+
         dispatch(addToFavorites(favorite)).then(() => {
-            // alert('add to favorites')
             setHeartIcon('fas fa-heart')
             setFavoriteText('Remove from Favorites')
         })
+
     }
     return (
         <>

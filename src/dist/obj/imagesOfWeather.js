@@ -69,7 +69,7 @@ const imagesOfWeather = [
     {
         id: 12,
         src: 'https://bmcdn.nl/assets/weather-icons/v2.0/fill/clear-day.svg',
-        alt: 'Clear',
+        alt: 'Mostly sunny',
         type: 'Mostly sunny'
     },
     {
@@ -90,6 +90,52 @@ const imagesOfWeather = [
         alt: 'Mostly clear',
         type: 'Mostly clear'
     },
+    {
+        id: 15,
+        src: 'https://basmilius.github.io/weather-icons/production/fill/all/rain.svg',
+        alt: 'Rain',
+        type: 'Rain'
+    },
+    {
+        id: 16,
+        src: 'https://basmilius.github.io/weather-icons/production/fill/all/rain.svg',
+        alt: 'Heavy rain',
+        type: 'Heavy rain'
+    },
+    {
+        id: 17,
+        src: 'https://basmilius.github.io/weather-icons/production/fill/all/rain.svg',
+        alt: 'Light rain',
+        type: 'Light rain'
+    },
+    {
+        id: 18,
+        src: 'https://basmilius.github.io/weather-icons/production/fill/all/thunderstorms.svg',
+        alt: 'Thunderstorm',
+        type: 'Thunderstorm'
+    },
+    {
+        id: 19,
+        src: 'https://basmilius.github.io/weather-icons/production/fill/all/rain.svg',
+        alt: 'A shower',
+        type: 'A shower'
+    },
+    {
+        id: 20,
+        src: 'https://basmilius.github.io/weather-icons/production/fill/all/partly-cloudy-day.svg',
+        alt: 'Partly cloudy',
+        type: 'Partly cloudy'
+    },
+    {
+        id: 21,
+        src: 'https://basmilius.github.io/weather-icons/production/fill/all/cloudy.svg',
+        alt: 'Overcast',
+        type: 'Overcast'
+    },
+
+
+
+
 
 
 

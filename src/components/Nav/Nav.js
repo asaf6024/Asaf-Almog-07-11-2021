@@ -1,35 +1,41 @@
 import React, { useState, useEffect } from 'react'
 import { Navbar, Nav, NavItem } from 'react-bootstrap'
 import { useHistory } from 'react-router'
+
+//components
 import Theme from './Theme/Theme'
-// import { a } from "react-router-dom";
+import Degrees from './Degrees/Degrees'
+
+//css
 import './nav.css'
 
 // Redux
 import { useSelector } from 'react-redux'
-import Degrees from './Degrees/Degrees'
 
-const NavPage = (props) => {
-    let history = useHistory()
+const NavPage = () => {
+
     const [bgDark, setBgDark] = useState(`inherit`)
     const [color, setColor] = useState(`white`)
+    let history = useHistory()
+
+    //redux STATE
     let favoritesState = useSelector((state) => state.favoritesReducer.favorites)
 
     useEffect(() => {
 
         window.addEventListener("scroll", handleScroll);
-
         document.getElementById('homeItem').classList.add('activeLink')
-        // props.get_chart()
-        // if (window.scrollY > 20)
-        //     document.getElementById('navBar').style.background = '#212529'
+
     })
 
+    //change nav style when scrolling
     const handleScroll = () => {
         if (window.scrollY > 40) {
+
             setBgDark('black')
             setColor('white')
             document.querySelector('.navItem').style.textShadow = 'none'
+
         } else {
             setBgDark(`inherit`)
             setColor('white')
@@ -46,57 +52,50 @@ const NavPage = (props) => {
 
         }
 
-
         document.getElementById(nav).classList.add('activeLink')
         history.push(target)
 
     }
 
-    // const setTheme = () => {
-    //     if (themeIcon == 'fas fa-moon fa-2x') {
-    //         document.getElementById('root').classList.add('DarkTheme')
-    //         document.getElementById('root').classList.remove('WhiteTheme')
-    //         setThemeIcon('far fa-lightbulb fa-2x text-white')
-    //     }
-    //     else {
-    //         document.getElementById('root').classList.add('WhiteTheme')
-    //         document.getElementById('root').classList.remove('DarkTheme')
-    //         setThemeIcon('fas fa-moon fa-2x')
-    //     }
-    // }
+
     return (
         <Navbar variant="dark" style={{ background: bgDark }} expand="lg" className='col-sm-12' id='navBar'>
-            {/* <Container > */}
-            {/* <Navbar.Brand href="/" className='col-sm-1'>My Portfolio</Navbar.Brand> */}
-            <Navbar.Brand href="/" className='col-sm-12 col-lg-7 font-weight-bold titleOfNav' style={{ color }}>Herolo Weather Task - Asaf Almog</Navbar.Brand>
+
+            <Navbar.Brand href="/" className='col-sm-12 col-lg-7 font-weight-bold titleOfNav'
+                style={{ color }}>Herolo Weather Task - Asaf Almog
+            </Navbar.Brand>
+
             <Navbar.Toggle aria-controls="navbar-dark-example" />
+
             <Navbar.Collapse id="navbar-dark-example" className='col-sm-12 col-lg-5 text-center'>
                 <Nav className='text-left row'>
                     <hr className='mobileHr' />
+
                     <NavItem className='navItem col-sm-12 col-lg-2 text-center'
                         style={{ color }} onClick={(e) => setActiveNav('/', 'homeItem')}>
                         <span id='homeItem'> Home</span>
                     </NavItem>
                     <hr className='mobileHr' />
+
                     <NavItem className='navItem col-sm-12 col-lg-3 text-center'
                         style={{ color }} onClick={(e) => setActiveNav('/favorites', 'favoriteItem')}>
                         <span id='favoriteItem' > Favorites&nbsp; </span>
-                        <sup className={`badge badge-pill `} style={{ background: '#2f00ff4f' }}>{favoritesState.length > 0 && favoritesState.length}</sup>
+                        <sup className={`badge badge-pill `} style={{ background: '#2f00ff4f' }}>
+                            {favoritesState.length > 0 && favoritesState.length}
+                        </sup>
                     </NavItem>
                     <hr className='mobileHr' />
-                    {/* <i className={`${themeIcon} text-center`} style={{ cursor: 'pointer' }}
-                        onClick={() => setTheme()}
-                    ></i> */}
+
                     <NavItem className='navItem col-sm-12 col-lg-3 text-left'>
                         <Theme className={`text-center`} color={color} />
                     </NavItem>
                     <hr className='mobileHr' />
+
                     <NavItem className='navItem col-sm-12 col-lg-2 text-center'>
                         <Degrees color={color} />
                     </NavItem>
                 </Nav>
             </Navbar.Collapse>
-            {/* </Container> */}
         </Navbar >
     )
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Search from './Search/Search'
 import Forecast from './Forecast/Forecast'
 import Geolocation from './Geolocation/Geolocation'
@@ -11,17 +11,20 @@ const Home = () => {
     const [lat, setLat] = useState('')
     const [lon, setLon] = useState('')
 
+
+
     return (
         <div className='container-fluid animated fadeIn'>
             <MDBContainer>
+
                 <h1 className='text-center font-weight-bold'>Weather Forecast</h1>
+
                 <Geolocation
                     setLat={setLat}
                     setLon={setLon}
                     setCityKey={setCityKey}
                     setCityName={setCityName}
                 />
-                {/* <Degrees /> */}
                 <Search
                     setCityKey={setCityKey}
                     setCityName={setCityName}

@@ -22,7 +22,7 @@ const FavoriteList = () => {
     const dispatch = useDispatch()
     const history = useHistory()
 
-    //redux states
+    //redux STATES
     let favoritesState = useSelector((state) => state.favoritesReducer.favorites)
     let degreeState = useSelector((state) => state.degreesReducer.degree)
 
@@ -31,7 +31,10 @@ const FavoriteList = () => {
             setFavoritesItems(favoritesState)
         })
 
+        //delete current local storage
         localStorage.removeItem('favoritesStorage')
+
+        //add a new local storage
         localStorage.setItem('favoritesStorage', JSON.stringify(favoritesState));
 
     }, [favoritesState])

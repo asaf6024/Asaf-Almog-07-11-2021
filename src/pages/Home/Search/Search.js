@@ -12,7 +12,7 @@ import './search.css'
 //fakeApi
 // import { cityObj } from '../../../dist/obj/fakeApi';
 
-// Redux
+//Redux
 import { useSelector, useDispatch } from 'react-redux'
 import { getLocationsByName } from '../../../redux/location/location-actions'
 
@@ -26,24 +26,20 @@ const Search = (props) => {
 
     let locationState = useSelector((state) => state.locationReducer.location)
 
-    //set location returned from api
+    //Set location STATE returned from api
     useEffect(() => {
-        // console.log('locationState', locationState)
-
-        //**api**
         setLocations(locationState)
 
     }, [locationState])
 
-    //serach after 0.5 second of typing
+    //Serach after 0.5 second of typing
     const debounceFindCity = _.debounce((e) => {
 
         props.setLat('')
         props.setLon('')
-        // setSearch(e.target.value)
         setDisplayFounded('block')
 
-        //initial favorites state when searching
+        //initial favorites STATE when searching
         history.push({
             state: undefined
         })
@@ -57,6 +53,7 @@ const Search = (props) => {
         })
     }, 500);
 
+    //validate typing only in English
     const validateEnglishLetters = (e) => {
         const regex = /^[a-zA-Z0-9 ]/;
         const chars = e.target.value.split('');

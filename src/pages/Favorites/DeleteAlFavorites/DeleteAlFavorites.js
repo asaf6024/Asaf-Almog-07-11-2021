@@ -1,5 +1,6 @@
 import React from "react";
 import { MDBTooltip } from 'mdbreact'
+
 // Redux
 import { useSelector, useDispatch } from 'react-redux'
 import { deleteFavorites } from '../../../redux/favorites/favorites-actions'

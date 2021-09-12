@@ -3,12 +3,15 @@ import React, { useState } from 'react';
 const Theme = (props) => {
     const [switch1, setswitch1] = useState(false)
 
-    const handleSwitchChange = nr => () => {
+    const handleSwitchChange = () => () => {
+
+        //set dark
         if (!switch1) {
             setswitch1(true)
             document.getElementById('root').classList.add('DarkTheme')
             document.getElementById('root').classList.remove('WhiteTheme')
         }
+        //set default
         else {
             setswitch1(false)
             document.getElementById('root').classList.add('WhiteTheme')
@@ -27,7 +30,8 @@ const Theme = (props) => {
                 readOnly
             />
             <br />
-            <label className='custom-control-label customHeadline cursorPointer' htmlFor='customSwitches'
+            <label className='custom-control-label customHeadline cursorPointer'
+                htmlFor='customSwitches'
                 style={{ fontVariant: 'small-caps', color: props.color }}>
                 darkmode
             </label>
