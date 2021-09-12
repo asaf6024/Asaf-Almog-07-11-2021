@@ -41,7 +41,6 @@ const Forecast = (props) => {
 
     //set current state when result returns from api
     useEffect(() => {
-        console.log('current', current)
 
         if (currentWeatherState != undefined)
             setCurrent(currentWeatherState)
@@ -70,7 +69,6 @@ const Forecast = (props) => {
 
         if (location.state == undefined) {
 
-            console.log('inside Searched location', geoPositionState)
 
             //**fake api**
             // setCurrent(currentOj)
