@@ -129,4 +129,7 @@ label.custom-control-label.customHeadline.cursorPointer {
   .mobileHr {
     border-bottom: 1px solid white;
   }
+  .navItem {
+    text-align: center !important;
+  }
 }

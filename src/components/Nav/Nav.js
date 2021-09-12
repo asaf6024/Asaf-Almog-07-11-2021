@@ -86,7 +86,7 @@ const NavPage = () => {
                     </NavItem>
                     <hr className='mobileHr' />
 
-                    <NavItem className='navItem col-sm-12 col-lg-3 text-left'>
+                    <NavItem className='navItem col-sm-12 col-lg-3 text-center'>
                         <Theme className={`text-center`} color={color} />
                     </NavItem>
                     <hr className='mobileHr' />
