@@ -8,7 +8,7 @@ A simple React Redux app that displays weather forecast of a chosen city from se
 - AccuWeather API
 - Geolocation API
 
-![Home Page](https://github.com/asaf6024/Asaf-Almog-07-11-2021/blob/master/public/weather-forecast.PNG)
+![Home Page](https://github.com/asaf6024/Asaf-Almog-07-11-2021/blob/master/public/img/weather-forecast.PNG)
 
 
 ## Getting started
