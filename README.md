@@ -15,7 +15,6 @@ A simple React Redux app that displays weather forecast of a chosen city from se
 
 Sign up and get to following API keys:
 - [AccuWeather API](https://developer.accuweather.com/)
-- [Geolocation API](https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API)
 - Fork the project and clone it locally.
 - Create a file at the root of the project called `.env` with the following contents:
 
