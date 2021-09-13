@@ -168,7 +168,7 @@ const Forecast = (props) => {
             console.log('geoPositionState', geoPositionState)
             //**api**
             props.setCityKey(geoPositionState.Key)
-            props.setCityName(geoPositionState.LocalizedName)
+            props.setCityName(`${geoPositionState.LocalizedName}, ${geoPositionState.Country.EnglishName}`)
             props.setCountryId(geoPositionState.Country.ID)
 
         }
