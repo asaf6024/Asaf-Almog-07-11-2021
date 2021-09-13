@@ -159,9 +159,9 @@ const FavoriteList = () => {
                     })
                     :
                     <MDBCol sm='12'>
-                        <MDBCard className='text-center'>
+                        <MDBCard className='text-center customCard animated fadeIn'>
                             <h2>Favorite list is Empty</h2>
-                            <Link to='/'>
+                            <Link to='/' className='linkOfIcon'>
                                 <i className="far fa-plus-square fa-5x cursorPointer"></i>
                             </Link>
                         </MDBCard>

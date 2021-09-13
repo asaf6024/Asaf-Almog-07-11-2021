@@ -61,10 +61,14 @@ code {
   background: white !important;
   color: black !important;
 }
+.DarkTheme .fa-trash:hover {
+  color: white !important;
+}
+
 .WhiteTheme {
   background: white;
 }
-.WhiteTheme p,
+/* .WhiteTheme p,
 .WhiteTheme a {
   color: white;
-}
+} */

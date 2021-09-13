@@ -137,3 +137,6 @@
 .ribbon-green:after {
   left: 0;
 }
+.linkOfIcon:hover {
+  color: white;
+}

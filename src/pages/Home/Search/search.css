@@ -26,3 +26,6 @@ i.fa.fa-search {
   background: rgba(47, 0, 255, 0.31);
   color: white;
 }
+.closeDiv {
+  position: relative;
+}

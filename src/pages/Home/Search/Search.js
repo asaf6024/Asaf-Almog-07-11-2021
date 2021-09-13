@@ -92,15 +92,16 @@ const Search = (props) => {
                         locations != null && locations.length > 0 &&
                         <div className='locationsFounded text-center'
                             style={
-                                locations.length < 2 ? { marginTop: '5px', display: displayFounded } :
-                                    locations.length < 4 ? { marginTop: '35px', display: displayFounded } :
-                                        locations.length < 8 ? { top: '65px', display: displayFounded } :
-                                            locations.length < 15 ? { top: '180px', display: displayFounded } : ''}
+                                locations.length < 2 ? { marginTop: '10px', display: displayFounded } :
+                                    locations.length < 4 ? { marginTop: '5px', display: displayFounded } :
+                                        locations.length < 8 ? { top: '115px', display: displayFounded } :
+                                            locations.length < 15 ? { top: '190px', display: displayFounded } : ''}
                         >
-                            <i className="fas fa-window-close fa-2x cursorPointer"
-                                style={{ position: 'absolute', right: '0', top: '0' }}
-                                onClick={() => setDisplayFounded('none')}
-                            ></i>
+                            <div className='closeDiv row'>
+                                <i className="fas fa-window-close fa-2x cursorPointer col-sm-12 text-right"
+                                    onClick={() => setDisplayFounded('none')}
+                                ></i>
+                            </div>
                             {locations.slice(0, 10).map((l, index) => {
                                 return <p key={index} onClick={() => {
                                     props.setCityKey(l.Key)
