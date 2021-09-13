@@ -38,14 +38,13 @@ const Forecast = (props) => {
     let degreeState = useSelector((state) => state.degreesReducer.degree)
     let geoPositionState = useSelector((state) => state.locationReducer.geoPosition)
 
-
     //set current state when result returns from api
     useEffect(() => {
 
         if (currentWeatherState != undefined)
             setCurrent(currentWeatherState)
 
-    }, [getCurrentWeather])
+    }, [currentWeatherState])
 
     const apiCall = (city) => {
 
@@ -78,7 +77,7 @@ const Forecast = (props) => {
 
                 // ** api **
                 apiCall(props.cityKey != null ? props.cityKey : '215854')
-                props.setCityName('Tel Aviv, Israel')
+                props.setCityName('Tel Aviv Port, Israel')
                 props.setCountryId('IL')
             }
 
@@ -100,6 +99,7 @@ const Forecast = (props) => {
         if (location.state != undefined) {
 
             //**fake api** set state from FAVORITES page (only when fake api)
+            // setCurrent(location.state)
 
             props.setCityKey(location.state.cityFromFavorites.cityKey)
             props.setCityName(location.state.cityFromFavorites.cityName)
@@ -165,9 +165,11 @@ const Forecast = (props) => {
     useEffect(() => {
         if (location.state == undefined && props.lat != '' & props.lon != '') {
 
+            console.log('geoPositionState', geoPositionState)
             //**api**
             props.setCityKey(geoPositionState.Key)
             props.setCityName(geoPositionState.LocalizedName)
+            props.setCountryId(geoPositionState.Country.ID)
 
         }
     }, [geoPositionState])
