@@ -29,7 +29,7 @@ const Day = (props) => {
     //*****set weather from api - first useEffect******
     useEffect(() => {
         // console.log('Day city', props.cityKey)
-        dispatch(getForecast(props.cityKey != null ? props.cityKey : '711822'))
+        dispatch(getForecast(props.cityKey != null ? props.cityKey : '215854'))
 
     }, [props.cityKey])
 

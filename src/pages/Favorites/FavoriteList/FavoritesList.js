@@ -8,13 +8,13 @@ import { MDBTooltip } from 'mdbreact'
 //object
 import imagesOfWeather from "../../../dist/obj/imagesOfWeather";
 
+//css
+import './favoriteList.css'
+
 // Redux
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from "react-router-dom";
 import { getFavorites, deleteFavoriteById } from '../../../redux/favorites/favorites-actions';
-
-//css
-import './favoriteList.css'
 
 const FavoriteList = () => {
 
@@ -26,7 +26,9 @@ const FavoriteList = () => {
     let favoritesState = useSelector((state) => state.favoritesReducer.favorites)
     let degreeState = useSelector((state) => state.degreesReducer.degree)
 
+    //get FAVORITES when page renderd
     useEffect(() => {
+
         dispatch(getFavorites()).then(() => {
             setFavoritesItems(favoritesState)
         })
@@ -64,11 +66,12 @@ const FavoriteList = () => {
                             <MDBCard id={`favoritecard${f.ID}`} style={{ margin: '15px' }}
                                 className='customCard cursorPointer animated'
                                 onClick={(e) => {
-                                    // console.log('e', e.target.className)
+
                                     if (e.target.className != 'card__overlay'
                                         && e.target.className != 'card__description bg-danger'
                                         && e.target.tagName != 'A'
                                         && e.target.tagName != 'I') {
+
                                         history.push({
                                             pathname: '/',
                                             state: {
@@ -91,22 +94,33 @@ const FavoriteList = () => {
 
                                 {
                                     f.Name.split(',').map((n, index) => {
+
                                         return index == 0 ?
+
                                             <h2 key={`customHeadline${index}`}
                                                 className='customHeadline' style={{ marginTop: '50px' }}> {n}
                                             </h2>
+
                                             : <div key={`wrapper${index}`} className="wrapper">
                                                 <div className="ribbon-wrapper-red">
-                                                    <div className="ribbon-country"><span className='fontVarianteSmallCaps'
-                                                        style={n.length > 8 ? { fontSize: 'x-small' } : {}}
-                                                    >{n}</span></div>
+
+                                                    <div className="ribbon-country">
+                                                        <span className='fontVarianteSmallCaps'
+                                                            style={n.length > 8 ? { fontSize: 'x-small' } : {}}
+                                                        >{n}
+                                                        </span>
+                                                    </div>
 
                                                 </div>
-                                                <div className="ribbon-wrapper-green"
-                                                >
-                                                    <div className="ribbon-green"><img className=''
-                                                        src={`https://www.countryflags.io/${f.CountryId != undefined ? f.CountryId : ''}/shiny/64.png`}>
-                                                    </img></div>
+
+                                                <div className="ribbon-wrapper-green">
+
+                                                    <div className="ribbon-green">
+                                                        <img className=''
+                                                            src={`https://www.countryflags.io/${f.CountryId != undefined ? f.CountryId : ''}/shiny/64.png`}>
+                                                        </img>
+                                                    </div>
+
                                                 </div>
                                             </div>
 
@@ -136,6 +150,7 @@ const FavoriteList = () => {
                                 </p>
 
                                 <div className="card__overlay">
+
                                     <div className='card__description bg-danger'>
                                         <a className='trashLink'>
 

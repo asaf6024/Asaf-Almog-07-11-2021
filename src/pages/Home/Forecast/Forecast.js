@@ -165,7 +165,6 @@ const Forecast = (props) => {
     useEffect(() => {
         if (location.state == undefined && props.lat != '' & props.lon != '') {
 
-            console.log('geoPositionState', geoPositionState)
             //**api**
             props.setCityKey(geoPositionState.Key)
             props.setCityName(`${geoPositionState.LocalizedName}, ${geoPositionState.Country.EnglishName}`)

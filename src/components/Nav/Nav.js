@@ -62,7 +62,7 @@ const NavPage = () => {
         <Navbar variant="dark" style={{ background: bgDark }} expand="lg" className='col-sm-12' id='navBar'>
 
             <Navbar.Brand href="/" className='col-sm-12 col-lg-7 font-weight-bold titleOfNav'
-                style={{ color }}>Herolo Weather Task - Asaf Almog
+                style={{ color }}>Weather Forecast
             </Navbar.Brand>
 
             <Navbar.Toggle aria-controls="navbar-dark-example" />

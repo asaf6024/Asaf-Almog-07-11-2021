@@ -132,7 +132,12 @@ const imagesOfWeather = [
         alt: 'Overcast',
         type: 'Overcast'
     },
-
+    {
+        id: 22,
+        src: 'https://basmilius.github.io/weather-icons/production/fill/all/partly-cloudy-day-drizzle.svg',
+        alt: 'Partly sunny w/ showers',
+        type: 'Partly sunny w/ showers'
+    },
 
 
 

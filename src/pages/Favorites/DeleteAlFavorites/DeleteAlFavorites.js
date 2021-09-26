@@ -6,8 +6,11 @@ import { useSelector, useDispatch } from 'react-redux'
 import { deleteFavorites } from '../../../redux/favorites/favorites-actions'
 
 const DeleteAllFavorites = () => {
+
     const dispatch = useDispatch()
+    //redux STATE
     let favoritesState = useSelector((state) => state.favoritesReducer.favorites)
+
     return (
         <>
             {
@@ -17,6 +20,7 @@ const DeleteAllFavorites = () => {
                     tag="span"
                     placement="top"
                 >
+
                     <i
                         onClick={() => dispatch(deleteFavorites()).then(() => {
                             localStorage.removeItem('favoritesStorage')
@@ -24,7 +28,9 @@ const DeleteAllFavorites = () => {
                         className="fas fa-trash fa-3x cursorPointer text-white">
 
                     </i>
+
                     <span>Delete all Favorites</span>
+
                 </MDBTooltip>
 
             }

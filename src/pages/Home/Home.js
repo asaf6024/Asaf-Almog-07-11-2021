@@ -1,17 +1,18 @@
 import React, { useState } from 'react'
+import { MDBContainer } from 'mdbreact'
+
+//components
 import Search from './Search/Search'
 import Forecast from './Forecast/Forecast'
 import Geolocation from './Geolocation/Geolocation'
-import { MDBContainer } from 'mdbreact'
 
 const Home = () => {
+
     const [cityKey, setCityKey] = useState(null)
     const [cityName, setCityName] = useState('')
     const [countryId, setCountryId] = useState('')
     const [lat, setLat] = useState('')
     const [lon, setLon] = useState('')
-
-
 
     return (
         <div className='container-fluid animated fadeIn'>
