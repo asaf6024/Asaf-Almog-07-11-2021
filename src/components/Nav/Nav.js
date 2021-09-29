@@ -26,6 +26,10 @@ const NavPage = () => {
         window.addEventListener("scroll", handleScroll);
         document.getElementById('homeItem').classList.add('activeLink')
 
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        }
+
     })
 
     //change nav style when scrolling
