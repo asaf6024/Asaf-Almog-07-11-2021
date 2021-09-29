@@ -5,7 +5,7 @@
 
 A simple React Redux app that displays weather forecast of a chosen city from several API sources:
 
-- AccuWeather API
+- AccuWeather API: location autocomplete, get current weather, 5-day daily forecast
 - Geolocation API
 
 ![Home Page](https://github.com/asaf6024/Asaf-Almog-07-11-2021/blob/master/public/img/weather-forecast.PNG)
