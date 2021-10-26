@@ -1,7 +1,7 @@
 
-## Weather Forecast 
+# Weather Forecast 
 
-[Live Demo](https://weather-forecast-asaf.netlify.app/)
+#[Live Demo](https://weather-forecast-asaf.netlify.app/)
 
 A simple React Redux app that displays weather forecast of a chosen city from several API sources:
 
