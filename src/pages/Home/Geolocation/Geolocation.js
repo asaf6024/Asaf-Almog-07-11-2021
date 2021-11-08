@@ -28,7 +28,6 @@ const Geolocation = (props) => {
             mapLink.href = `https://www.openstreetmap.org/#map=18/${latitude}/${longitude}`;
             mapLink.textContent = `Latitude: ${latitude} °, Longitude: ${longitude} °`;
 
-
         }
 
         function error() {
@@ -48,8 +47,6 @@ const Geolocation = (props) => {
         }
 
     }
-
-
 
     return (
         <div style={{ display: 'none' }}>

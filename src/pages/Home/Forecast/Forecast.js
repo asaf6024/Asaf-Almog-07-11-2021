@@ -243,10 +243,10 @@ const Forecast = (props) => {
                                             })
                                         }
 
-                                        <img className='m0'
+                                        {/* <img className='m0'
                                             alt={c.CountryId != undefined ? c.CountryId : props.countryId}
                                             src={`https://www.countryflags.io/${c.CountryId != undefined ? c.CountryId : props.countryId}/shiny/64.png`}>
-                                        </img>
+                                        </img> */}
 
                                     </MDBCol>
 

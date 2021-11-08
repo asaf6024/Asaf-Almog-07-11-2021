@@ -113,7 +113,7 @@ const FavoriteList = () => {
 
                                                 </div>
 
-                                                <div className="ribbon-wrapper-green">
+                                                {/* <div className="ribbon-wrapper-green">
 
                                                     <div className="ribbon-green">
                                                         <img className=''
@@ -121,7 +121,7 @@ const FavoriteList = () => {
                                                         </img>
                                                     </div>
 
-                                                </div>
+                                                </div> */}
                                             </div>
 
                                     })

@@ -66,6 +66,14 @@ const Search = (props) => {
         else
             return debounceFindCity(e)
     }
+
+    const styleOfSearchedDiv = (locations) => {
+        return locations.length < 2 ? { marginTop: '10px', display: displayFounded } :
+            locations.length < 4 ? { marginTop: '5px', display: displayFounded } :
+                locations.length < 8 ? { top: '115px', display: displayFounded } :
+                    locations.length < 15 ? { top: '190px', display: displayFounded } : ''
+    }
+
     return (
         <>
             <MDBRow>
@@ -91,11 +99,7 @@ const Search = (props) => {
                     {
                         locations != null && locations.length > 0 &&
                         <div className='locationsFounded text-center'
-                            style={
-                                locations.length < 2 ? { marginTop: '10px', display: displayFounded } :
-                                    locations.length < 4 ? { marginTop: '5px', display: displayFounded } :
-                                        locations.length < 8 ? { top: '115px', display: displayFounded } :
-                                            locations.length < 15 ? { top: '190px', display: displayFounded } : ''}
+                            style={styleOfSearchedDiv(locations)}
                         >
                             <div className='closeDiv row'>
                                 <i className="fas fa-window-close fa-2x cursorPointer col-sm-12 text-right"
